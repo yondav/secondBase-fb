@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { GlobalStyles } from 'twin.macro'; // new
+import { GlobalStyles } from 'twin.macro';
 import App from './App';
 import './index.css';
 
