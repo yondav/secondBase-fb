@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
+  signOut,
 } from 'firebase/auth';
 import { UserContext } from './firebase.context.user';
 
@@ -62,37 +63,14 @@ export default function useAuth() {
     }
   };
 
-  return { signup, login, state };
+  // logout
+  const logout = () => {
+    signOut(auth);
+    dispatch({
+      type: 'NOT_AUTHENTICATED',
+      payload: { code: 401, message: 'logged out' },
+    });
+  };
+
+  return { signup, login, logout, state };
 }
-
-// // register new user
-// export const signup = async ({ first_name, last_name, email, password }) => {
-//   try {
-//     const userCredential = await createUserWithEmailAndPassword(
-//       auth,
-//       email,
-//       password
-//     );
-
-//     const user = userCredential.user;
-
-//     await updateProfile(user, {
-//       displayName: `${first_name} ${last_name}`,
-//     });
-
-//     return user;
-//   } catch (err) {
-//     console.log(err.code, err.message);
-//   }
-// };
-
-// // login
-// export const login = async ({ email, password }) => {
-//   const userCredential = await signInWithEmailAndPassword(
-//     auth,
-//     email,
-//     password
-//   );
-
-//   return userCredential.user;
-// };

@@ -1,7 +1,7 @@
 import tw, { styled, css } from 'twin.macro';
 
 export const Base = styled.div(({ login }) => [
-  tw`relative flex flex-col bg-gray-50 m-auto py-10 container rounded-md w-full overflow-hidden`,
+  tw`relative flex flex-col bg-gray-50 dark:bg-gray-950 m-auto py-10 container rounded-md w-full overflow-hidden transition-all duration-300 ease-in-out`,
 
   css`
     & .card-body {

@@ -28,18 +28,20 @@ export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
 
   useEffect(() => {
-    const unsubscribe = () => {
-      const auth = getAuth();
-      onAuthStateChanged(auth, user =>
-        user
-          ? dispatch({ type: 'AUTHENTICATED', payload: user })
-          : dispatch({
-              type: 'NOT_AUTHENTICATED',
-              payload: 'No active session',
-            })
-      );
-    };
-    return () => unsubscribe();
+    console.log('CONTEXT USE EFFECT');
+    const auth = getAuth();
+    console.log('INITIAL USER', auth.currentUser);
+    auth.currentUser &&
+      dispatch({ type: 'AUTHENTICATED', payload: auth.currentUser });
+
+    onAuthStateChanged(auth, user =>
+      user
+        ? dispatch({ type: 'AUTHENTICATED', payload: user })
+        : dispatch({
+            type: 'NOT_AUTHENTICATED',
+            payload: 'No active session',
+          })
+    );
   }, []);
 
   return (

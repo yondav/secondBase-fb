@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import useAuth from '../../firebase/auth/firebase.useAuth';
+import useAuth from '../../context/auth/firebase.useAuth';
 
 import { Card, Grid, Form, Button } from '../../styles';
 
