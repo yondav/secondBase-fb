@@ -14,7 +14,6 @@ const Navbar = () => {
     const unsubscribe = () => {
       let path = pathname.split('/');
       setActivePath(path[path.length - 1]);
-      console.log(activePath);
     };
 
     return unsubscribe();

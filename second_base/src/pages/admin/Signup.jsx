@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import useAuth from '../../context/auth/firebase.actions.useAuth';
 
 import { Card, Grid, Form, Button } from '../../styles';
+import useData from '../../context/data/firebase.actions.useData';
 
 const SignUpPage = () => {
   const navigate = useNavigate();

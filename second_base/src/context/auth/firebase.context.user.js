@@ -28,9 +28,7 @@ export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
 
   useEffect(() => {
-    console.log('CONTEXT USE EFFECT');
     const auth = getAuth();
-    console.log('INITIAL USER', auth.currentUser);
     auth.currentUser &&
       dispatch({ type: 'AUTHENTICATED', payload: auth.currentUser });
 

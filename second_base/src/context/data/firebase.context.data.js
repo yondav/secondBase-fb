@@ -4,7 +4,7 @@ import dataReducer from './firebase.reducer.data';
 export const DataContext = React.createContext();
 
 let initialState = {
-  data: { studio: {}, user: {}, gear: {}, artists: {} },
+  data: { studio: {}, user: [], gear: {}, artists: {} },
 };
 
 export const DataProvider = ({ children }) => {

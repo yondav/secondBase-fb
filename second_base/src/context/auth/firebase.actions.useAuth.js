@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -7,32 +8,46 @@ import {
   signOut,
 } from 'firebase/auth';
 import { UserContext } from './firebase.context.user';
+import { DataContext } from '../data/firebase.context.data';
 import useData from '../data/firebase.actions.useData';
+import { con } from '../../utils/console';
 
 const auth = getAuth();
 
 export default function useAuth() {
   const { state, dispatch } = useContext(UserContext);
+  const navigate = useNavigate();
+  const {
+    state: {
+      data: { user },
+    },
+  } = useContext(DataContext);
   const { addUser } = useData();
+
   // register new user
   const signup = async ({ first_name, last_name, email, password }) => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      // if there is already a registered user, block new users
+      if (user.length < 1) {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
 
-      const user = userCredential.user;
+        const user = userCredential.user;
 
-      if (user) {
-        await updateProfile(user, {
-          displayName: `${first_name} ${last_name}`,
-        });
-        await addUser(user);
-        dispatch({ type: 'AUTHENTICATED', payload: user });
+        if (user) {
+          await updateProfile(user, {
+            displayName: `${first_name} ${last_name}`,
+          });
+          await addUser(user);
+          dispatch({ type: 'AUTHENTICATED', payload: user });
 
-        return user;
+          return user;
+        }
+      } else {
+        navigate('/404');
       }
     } catch (err) {
       dispatch({
@@ -54,7 +69,6 @@ export default function useAuth() {
       const user = userCredential.user;
 
       if (user) {
-        console.log(user);
         dispatch({ type: 'AUTHENTICATED', payload: user });
         return user;
       }
