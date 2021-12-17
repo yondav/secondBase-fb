@@ -7,12 +7,13 @@ import {
   signOut,
 } from 'firebase/auth';
 import { UserContext } from './firebase.context.user';
+import useData from '../data/firebase.actions.useData';
 
 const auth = getAuth();
 
 export default function useAuth() {
   const { state, dispatch } = useContext(UserContext);
-
+  const { addUser } = useData();
   // register new user
   const signup = async ({ first_name, last_name, email, password }) => {
     try {
@@ -28,7 +29,9 @@ export default function useAuth() {
         await updateProfile(user, {
           displayName: `${first_name} ${last_name}`,
         });
+        await addUser(user);
         dispatch({ type: 'AUTHENTICATED', payload: user });
+
         return user;
       }
     } catch (err) {

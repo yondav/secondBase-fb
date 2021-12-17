@@ -1,5 +1,5 @@
 import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
+import { getFirestore } from 'firebase/firestore';
 import 'firebase/compat/storage';
 
 firebase.initializeApp({
@@ -10,7 +10,5 @@ firebase.initializeApp({
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 });
 
-console.log(firebase.app().options);
-
-export const firestore = firebase.firestore();
+export const db = getFirestore();
 // export const storage = firebase.storage();

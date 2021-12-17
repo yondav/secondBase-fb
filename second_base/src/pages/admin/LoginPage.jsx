@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import useAuth from '../../context/auth/firebase.useAuth';
+import useAuth from '../../context/auth/firebase.actions.useAuth';
 
 import Spinner from '../../components/spinner';
 import { Card, Form, Button } from '../../styles';

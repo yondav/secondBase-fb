@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import './firebase/firebase.config';
 
 import { ThemeProvider } from './context/theme/theme.context';
+import { DataProvider } from './context/data/firebase.context.data';
 import { UserProvider } from './context/auth/firebase.context.user';
 
 import LoginPage from './pages/admin/LoginPage';
@@ -22,24 +23,26 @@ function App() {
   useEffect(() => console.log(localStorage.getItem('dark')));
   return (
     <ThemeProvider>
-      <UserProvider>
-        <Navbar />
-        <WrapApp>
-          <Routes>
-            <Route path='/' element={<ClientRoute />}>
-              <Route path='about' element={<About />} />
-              <Route path='gear' element={<Gear />} />
-              <Route path='artists' element={<Artists />} />
-              <Route path='booking' element={<Booking />} />
-            </Route>
-            <Route path='/admin/signup' element={<SignUpPage />} />
-            <Route path='/admin/login' element={<LoginPage />} />
-            <Route path='/admin/' element={<AdminRoute />}>
-              <Route path='portal' element={<Portal />} />
-            </Route>
-          </Routes>
-        </WrapApp>
-      </UserProvider>
+      <DataProvider>
+        <UserProvider>
+          <Navbar />
+          <WrapApp>
+            <Routes>
+              <Route path='/' element={<ClientRoute />}>
+                <Route path='about' element={<About />} />
+                <Route path='gear' element={<Gear />} />
+                <Route path='artists' element={<Artists />} />
+                <Route path='booking' element={<Booking />} />
+              </Route>
+              <Route path='/admin/signup' element={<SignUpPage />} />
+              <Route path='/admin/login' element={<LoginPage />} />
+              <Route path='/admin/' element={<AdminRoute />}>
+                <Route path='portal' element={<Portal />} />
+              </Route>
+            </Routes>
+          </WrapApp>
+        </UserProvider>
+      </DataProvider>
     </ThemeProvider>
   );
 }

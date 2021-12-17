@@ -6,7 +6,7 @@ import {
   RiInstagramFill,
 } from 'react-icons/ri';
 
-import useAuth from '../../context/auth/firebase.useAuth';
+import useAuth from '../../context/auth/firebase.actions.useAuth';
 import { ThemeContext } from '../../context/theme/theme.context';
 import { Flex, Nav } from '../../styles';
 
