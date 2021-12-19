@@ -1,10 +1,10 @@
-import React, { useReducer } from 'react';
+import { useReducer, createContext } from 'react';
 import dataReducer from './firebase.reducer.data';
 
-export const DataContext = React.createContext();
+export const DataContext = createContext();
 
 let initialState = {
-  data: { studio: {}, user: [], gear: {}, artists: {} },
+  data: { studio: {}, user: [], gear: {}, artists: {}, images: {} },
 };
 
 export const DataProvider = ({ children }) => {

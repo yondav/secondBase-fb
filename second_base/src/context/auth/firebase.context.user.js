@@ -29,9 +29,12 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const auth = getAuth();
+
+    // first check if there is an authenticated user
     auth.currentUser &&
       dispatch({ type: 'AUTHENTICATED', payload: auth.currentUser });
 
+    // then listen for changes in authentication
     onAuthStateChanged(auth, user =>
       user
         ? dispatch({ type: 'AUTHENTICATED', payload: user })

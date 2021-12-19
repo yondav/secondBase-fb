@@ -1,4 +1,6 @@
-import React, { useContext } from 'react';
+/** @jsxImportSource @emotion/react */
+import tw from 'twin.macro';
+import { useContext } from 'react';
 import {
   RiContrast2Line,
   RiContrast2Fill,
@@ -8,18 +10,9 @@ import {
 
 import useAuth from '../../context/auth/firebase.actions.useAuth';
 import { ThemeContext } from '../../context/theme/theme.context';
-import { Flex, Nav } from '../../styles';
-
-const pageLinks = [
-  { name: 'about', text: 'About', to: '/about' },
-  { name: 'gear', text: 'Gear', to: '/gear' },
-  { name: 'artists', text: 'Artists', to: '/artists' },
-  { name: 'booking', text: 'Booking', to: '/booking' },
-];
-const adminLinks = logout => [
-  { name: 'portal', text: 'Portal', to: '/admin/portal' },
-  { name: 'logout', text: 'Log out', to: '/admin/login', onClick: logout },
-];
+import { Nav } from '../../styles';
+import { toTitle } from '../../utils/helpers';
+import { pageLinks, adminLinks } from './linksObs';
 
 const Links = ({ activePath }) => {
   const {
@@ -35,8 +28,8 @@ const Links = ({ activePath }) => {
       {pageLinks.map((pg, i) => (
         <Nav.NavLink
           key={i}
-          to={pg.to}
-          text={pg.text}
+          to={`/${pg.name}`}
+          text={toTitle(pg.name)}
           name={pg.name}
           active={activePath}
         />
@@ -46,13 +39,13 @@ const Links = ({ activePath }) => {
           <Nav.NavLink
             key={i}
             to={pg.to}
-            text={pg.text}
+            text={toTitle(pg.name)}
             name={pg.name}
             active={activePath}
             onClick={pg.onClick}
           />
         ))}
-      <Flex>
+      <div tw='flex'>
         <Nav.Icon onClick={toggleTheme}>
           {dark ? <RiContrast2Fill /> : <RiContrast2Line />}
         </Nav.Icon>
@@ -65,7 +58,7 @@ const Links = ({ activePath }) => {
             {dark ? <RiInstagramLine /> : <RiInstagramFill />}
           </Nav.Icon>
         </a>
-      </Flex>
+      </div>
     </>
   );
 };

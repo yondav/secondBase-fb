@@ -8,6 +8,7 @@ import { DataProvider } from './context/data/firebase.context.data';
 import { UserProvider } from './context/auth/firebase.context.user';
 
 import App from './App';
+import 'tailwindcss/dist/base.min.css';
 import './index.css';
 
 ReactDOM.render(

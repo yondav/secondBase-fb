@@ -6,7 +6,7 @@ export default function dataReducer(state, { type, payload }) {
       con.success(`** USER FETCHED uid: ${payload.uid}`);
       return {
         ...state,
-        data: { ...state.data, user: [...state.data.user, payload] },
+        data: { ...state.data, user: [payload] },
       };
     case 'ADD_USER':
       con.success('** USER ADDED **');
@@ -15,7 +15,12 @@ export default function dataReducer(state, { type, payload }) {
         ...state,
         data: { ...state.data, user: payload },
       };
-
+    case 'GET_IMAGES':
+      con.success('** IMAGE FETCHED **');
+      return {
+        ...state,
+        data: { ...state.data, images: { ...state.data.images, ...payload } },
+      };
     default:
       return state;
   }

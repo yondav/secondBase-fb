@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import useAuth from '../../context/auth/firebase.actions.useAuth';
 
 import { Card, Grid, Form, Button } from '../../styles';
-import useData from '../../context/data/firebase.actions.useData';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
   const { signup } = useAuth();
   const { register, handleSubmit, reset } = useForm();
-  const [isLoading, setLoading] = useState(false);
 
   const onSubmit = async data => {
     let newUser;
-    setLoading(true);
     try {
       newUser = await signup(data);
       reset();
@@ -25,8 +22,6 @@ const SignUpPage = () => {
 
     if (newUser) {
       navigate('/admin/portal');
-    } else {
-      setLoading(false);
     }
   };
   return (

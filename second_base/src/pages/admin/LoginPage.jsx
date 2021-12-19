@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
@@ -28,13 +28,12 @@ const LoginPage = () => {
     setTimeout(() => setLoading(false), 2550);
   };
 
-  useEffect(() => console.log(user), [user]);
   return (
     <>
       {!!user && !isLoading ? (
         <Navigate to='/admin/portal' />
       ) : (
-        <Card.Base login>
+        <Card.Base login={1}>
           {!isLoading ? (
             <Card.Body>
               <form onSubmit={handleSubmit(onSubmit)}>

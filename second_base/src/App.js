@@ -1,49 +1,60 @@
-import React, { useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './firebase/firebase.config';
 
 import useData from './context/data/firebase.actions.useData';
-
-import LoginPage from './pages/admin/LoginPage';
-import Portal from './pages/admin/Portal';
-import About from './pages/client/About';
-import Artists from './pages/client/Artists';
-import Booking from './pages/client/Booking';
-import Gear from './pages/client/Gear';
-import SignUpPage from './pages/admin/Signup';
-import AdminRoute from './router/router.adminRoutes';
-
 import { DataContext } from './context/data/firebase.context.data';
-import { WrapApp } from './styles';
+
+import { Admin, Client, ErrorPage } from './pages';
+import * as Router from './router';
+
 import Navbar from './components/navbar';
-import ClientRoute from './router/router.clientRoute';
-import ErrorPage from './pages/error';
+import Footer from './components/footer';
+import { WrapApp } from './styles';
+import { con } from './utils/console';
 
 function App() {
   const { state } = useContext(DataContext);
-  const { getAllUsers } = useData();
-  const fetch = async () => await getAllUsers();
+  const { getAllUsers, getAllImages } = useData();
+
+  const fetch = async () => {
+    await getAllUsers();
+    await getAllImages();
+  };
+
   useEffect(() => fetch(), []);
-  useEffect(() => console.log('STATE: ', state), [state]);
+  useEffect(() => con.state(state), [state]);
+
   return (
     <>
       <Navbar />
       <WrapApp>
         <Routes>
-          <Route path='/' element={<ClientRoute />}>
-            <Route path='about' element={<About />} />
-            <Route path='gear' element={<Gear />} />
-            <Route path='artists' element={<Artists />} />
-            <Route path='booking' element={<Booking />} />
+          <Route path='/' element={<Router.ClientRoute />}>
+            <Route path='about' element={<Client.About />} />
+            <Route path='gear' element={<Client.Gear />} />
+            <Route path='artists' element={<Client.Artists />} />
+            <Route path='booking' element={<Client.Booking />} />
           </Route>
-          <Route path='/admin/signup' element={<SignUpPage />} />
-          <Route path='/admin/login' element={<LoginPage />} />
-          <Route path='/admin/' element={<AdminRoute />}>
-            <Route path='portal' element={<Portal />} />
+          <Route path='/admin/signup' element={<Admin.SignupPage />} />
+          <Route path='/admin/login' element={<Admin.LoginPage />} />
+          <Route path='/admin/' element={<Router.AdminRoute />}>
+            <Route path='portal/' element={<Router.PortalRoute />}>
+              <Route path='profile/' element={<Admin.Portal.Profile.View />}>
+                <Route path='edit/' element={<Router.ModalRoute />}>
+                  <Route path='bio' element={<div>BIO</div>} />
+                  <Route path='img' element={<Admin.Portal.Profile.Image />} />
+                </Route>
+              </Route>
+              <Route path='studio' element={<Admin.Portal.Studio.View />} />
+              <Route path='gear' element={<Admin.Portal.Gear.View />} />
+              <Route path='artists' element={<Admin.Portal.Artists.View />} />
+            </Route>
           </Route>
           <Route path='/*' element={<ErrorPage />} />
         </Routes>
       </WrapApp>
+      <Footer />
     </>
   );
 }

@@ -3,11 +3,6 @@ export const userModel = user => ({
   uid: user.uid,
   email: user.email,
   name: user.displayName,
-  address: {
-    address: '',
-    city: '',
-    state: '',
-    zip: '',
-  },
+  bio: '',
   profile_img: '',
 });

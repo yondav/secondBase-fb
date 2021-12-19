@@ -1,11 +1,11 @@
-import React from 'react';
+/** @jsxImportSource @emotion/react */
+import tw from 'twin.macro';
 import { motion } from 'framer-motion';
 import { drawPath } from '../../utils/framer';
-import { Flex } from '../../styles';
 
 const Spinner = () => {
   return (
-    <Flex jc ac wfull>
+    <div tw='flex justify-center items-center w-full'>
       <svg
         xmlns='http://www.w3.org/2000/svg'
         width='100'
@@ -35,7 +35,7 @@ const Spinner = () => {
           />
         </g>
       </svg>
-    </Flex>
+    </div>
   );
 };
 

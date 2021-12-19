@@ -20,3 +20,17 @@ export const drawPath = repeat => ({
     },
   },
 });
+
+// fade animation - modal overlay, accordian section
+export const fade = {
+  hidden: { opacity: 0 },
+  visible: opacity => ({ opacity }),
+  transition: duration => ({ duration, ease: 'easeInOut' }),
+};
+
+// grow from 0 height to element height - modal, accordian section
+export const growHeight = {
+  hidden: { height: 0 },
+  visible: { height: 'auto' },
+  transition: duration => ({ duration, ease: 'easeInOut' }),
+};

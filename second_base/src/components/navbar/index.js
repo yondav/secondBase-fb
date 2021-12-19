@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+/** @jsxImportSource @emotion/react */
+import tw from 'twin.macro';
+import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { Flex, Nav } from '../../styles';
+import { Nav } from '../../styles';
 import Links from './Links';
 import Logo from '../logo';
 
@@ -53,9 +55,9 @@ const Navbar = () => {
               exit={{ opacity: 0, height: 0 }}
               transition={{ suration: 0.5, delay: 0.2, ease: 'easeIn' }}
             >
-              <Flex col style={{ width: 'fit-content' }}>
+              <div tw='flex flex-col w-min'>
                 <Links activePath={activePath} />
-              </Flex>
+              </div>
             </Nav.SideNav>
           )}
         </AnimatePresence>

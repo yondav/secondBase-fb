@@ -13,7 +13,7 @@ const NavBar = styled(motion.nav)(({ dark, sticky }) => [
     }
 
     & .inner-nav-content {
-      ${tw`w-full flex justify-between items-center space-x-7 transition-all duration-300 ease-in-out`}
+      ${tw`w-full flex  lg:pb-0 justify-between items-center space-x-7 transition-all duration-300 ease-in-out`}
     }
 
     & .nav-logo {
@@ -27,34 +27,42 @@ const NavBar = styled(motion.nav)(({ dark, sticky }) => [
 ]);
 
 export const Bar = ({ dark, sticky, children }) => (
-  <NavBar dark={dark ? +true : +false} sticky={sticky ? +true : +false}>
+  <NavBar dark={dark ? 1 : 2} sticky={sticky ? 1 : 2}>
     <div className='inner-nav-wrap'>{children}</div>
   </NavBar>
 );
 
 export const Links = styled.div(
-  tw`hidden md:flex items-center space-x-1 transition-all duration-300 ease-in-out`
+  tw`hidden lg:flex items-center space-x-1 transition-all duration-300 ease-in-out`
 );
 
-const StyledLink = styled(Link)(({ active, name }) => [
+const StyledLink = styled(Link)(({ active, name, invert }) => [
   tw`pt-6 px-2 text-gray-500 hover:text-gray-50 transition duration-300`,
   active === name && tw`text-gray-50 shadow-lg`,
+  invert && tw`text-gray-950 hover:text-gray-600`,
 ]);
 
-export const NavLink = ({ text, active, name, to, onClick }) => (
+export const NavLink = ({ text, active, name, to, onClick, invert }) => (
   <>
-    <StyledLink to={to} name={name} active={active} onClick={onClick}>
+    <StyledLink
+      to={to}
+      name={name}
+      active={active}
+      onClick={onClick}
+      invert={invert}
+    >
       {text}
     </StyledLink>
   </>
 );
 
-export const Icon = styled.div(
-  tw`pt-6 px-2 text-lg text-gray-500 hover:text-gray-50 transition duration-300 cursor-pointer`
-);
+export const Icon = styled.div(({ invert }) => [
+  tw`pt-6 px-2 text-lg text-gray-500 hover:text-gray-50 transition duration-300 cursor-pointer`,
+  invert && tw`text-gray-950 hover:text-gray-600`,
+]);
 
 const Hamburger = styled.div(({ active }) => [
-  tw`md:hidden relative z-20 flex items-center justify-center w-10 h-10 cursor-pointer transition-all duration-300 ease-in-out`,
+  tw`lg:hidden relative z-20 flex items-center justify-center w-10 h-10 cursor-pointer transition-all duration-300 ease-in-out`,
 
   css`
     margin-right: ${active && `35px !important`};

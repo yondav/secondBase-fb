@@ -1,10 +1,12 @@
+/** @jsxImportSource @emotion/react */
 import tw, { styled, css } from 'twin.macro';
 
-const Btn = styled.button(({ purple }) => [
+export const Btn = styled.button(({ purple, tab, active }) => [
   tw`block rounded-lg m-3 px-4 py-3 text-center transition-all duration-300 ease-in-out hover:shadow-lg`,
 
   purple &&
     css`
+      ${tw`transition-all duration-300 ease-in-out`}
       background-image: linear-gradient(
         to right,
         #6441a5 50%,
@@ -18,14 +20,15 @@ const Btn = styled.button(({ purple }) => [
         background-position: right center;
       }
     `,
+  tab &&
+    css`
+      ${tw`w-full m-0 bg-gray-300	hover:bg-gray-150 dark:bg-gray-750 dark:hover:bg-gray-800 dark:text-gray-50 rounded-b-none`}
+      ${active && tw`bg-gray-50 dark:bg-gray-900`}
+    `,
 ]);
 
-const Align = styled.div`
-  ${tw`flex justify-end`}
-`;
-
 export const Button = ({ children, ...rest }) => (
-  <Align>
+  <div tw='flex justify-end'>
     <Btn {...rest}>{children}</Btn>
-  </Align>
+  </div>
 );
