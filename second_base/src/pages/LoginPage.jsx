@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import useAuth from '../../context/auth/firebase.actions.useAuth';
+import useAuth from '../context/auth/firebase.actions.useAuth';
 
-import Spinner from '../../components/spinner';
-import { Card, Form, Button } from '../../styles';
+import { Spinner } from '../components';
+import { Card, Form, Button } from '../styles';
 
 const LoginPage = () => {
   const {
@@ -41,13 +41,13 @@ const LoginPage = () => {
                   <Form.Label group htmlFor='email'>
                     Email
                   </Form.Label>
-                  <Form.Input ref={register} type='email' name='email' />
+                  <Form.Input id='email' ref={register} type='email' name='email' />
                 </Form.Group>
                 <Form.Group>
                   <Form.Label group htmlFor='password'>
                     Password
                   </Form.Label>
-                  <Form.Input ref={register} type='password' name='password' />
+                  <Form.Input id='password' ref={register} type='password' name='password' />
                 </Form.Group>
                 <Button purple>Login</Button>
               </form>

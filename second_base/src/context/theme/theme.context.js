@@ -34,18 +34,11 @@ export const ThemeProvider = ({ children }) => {
     console.log(state);
   };
 
-  useEffect(
-    () => () => {
-      if (initialState.dark) {
-        HTML.toggle('dark');
-      }
-    },
-    []
-  );
+  useEffect(() => {
+    if (initialState.dark) {
+      HTML.toggle('dark');
+    }
+  }, []);
 
-  return (
-    <ThemeContext.Provider value={{ toggleTheme, state }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ toggleTheme, state }}>{children}</ThemeContext.Provider>;
 };

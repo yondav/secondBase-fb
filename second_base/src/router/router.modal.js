@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import Modal from '../components/modal';
+import { Modal } from '../components';
 
-const ModalRoute = () => {
+const ModalRouter = () => {
   const [isOpen, setIsopen] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
@@ -20,4 +20,4 @@ const ModalRoute = () => {
   );
 };
 
-export default ModalRoute;
+export default ModalRouter;

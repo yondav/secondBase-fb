@@ -1,7 +1,7 @@
 import React from 'react';
 
-const View = () => {
+const ArtistsView = () => {
   return <div>Artists</div>;
 };
 
-export default View;
+export default ArtistsView;

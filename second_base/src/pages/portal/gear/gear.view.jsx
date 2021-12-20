@@ -1,7 +1,7 @@
 import React from 'react';
 
-const View = () => {
+const GearView = () => {
   return <div>GEAR</div>;
 };
 
-export default View;
+export default GearView;

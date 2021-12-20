@@ -3,7 +3,7 @@ import { con } from '../../utils/console';
 export default function dataReducer(state, { type, payload }) {
   switch (type) {
     case 'GET_USERS':
-      con.success(`** USER FETCHED uid: ${payload.uid}`);
+      con.success(`** USER FETCHED ** uid: ${payload.uid}`);
       return {
         ...state,
         data: { ...state.data, user: [payload] },
@@ -14,6 +14,12 @@ export default function dataReducer(state, { type, payload }) {
       return {
         ...state,
         data: { ...state.data, user: payload },
+      };
+    case 'UPDATE_USER':
+      con.success(`** USER UPDATED ** uid: ${payload}`);
+      return {
+        ...state,
+        data: { ...state.data, user: [payload] },
       };
     case 'GET_IMAGES':
       con.success('** IMAGE FETCHED **');

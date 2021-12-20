@@ -4,5 +4,5 @@ export const userModel = user => ({
   email: user.email,
   name: user.displayName,
   bio: '',
-  profile_img: '',
+  profile_img: { color: false, url: '', photographer: '' },
 });

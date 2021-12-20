@@ -1,70 +1,51 @@
 import { useState, useContext, useEffect } from 'react';
-import { collection, setDoc, getDocs, doc } from 'firebase/firestore';
-// import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
 import { DataContext } from './firebase.context.data';
-import { db } from '../../firebase/firebase.config';
 import { userModel } from '../../firebase/firebase.models';
-import { con } from '../../utils/console';
+import * as action from '../../firebase/firebase.tasks';
 
 export default function useData() {
-  const { state, dispatch } = useContext(DataContext);
+  const { dispatch } = useContext(DataContext);
   const [images, setImages] = useState({});
-  // const storage = getStorage();
+
+  // get all users
+  const getAllUsers = async () => {
+    const querySnapshot = await action.fetchAll('users');
+    querySnapshot.forEach(doc => {
+      dispatch({ type: 'GET_USERS', payload: doc.data() });
+    });
+  };
+
+  // get all images
+  const getAllImages = async () => {
+    const querySnapshot = await action.fetchAll('images');
+    querySnapshot.forEach(doc => {
+      const img = { img: doc.data() };
+      setImages(prev => ({ ...prev, ...img[Object.keys(img)[0]] }));
+    });
+  };
 
   // users
   // add user (only called when user is registered in useAuth)
   const addUser = async user => {
-    try {
-      const newUser = await setDoc(doc(db, 'users', user.uid), userModel(user));
-
-      if (newUser) await getAllUsers();
-    } catch (err) {
-      con.fail({ code: err.code, msg: err.message });
-    }
+    const newUser = await action.post('users', user.uid, userModel(user));
+    if (newUser) await getAllUsers();
   };
 
-  // get all users
-  const getAllUsers = async () => {
-    try {
-      const querySnapshot = await getDocs(collection(db, 'users'));
-      querySnapshot.forEach(doc => {
-        dispatch({ type: 'GET_USERS', payload: doc.data() });
-      });
-    } catch (err) {
-      con.fail({ code: err.code, msg: err.message });
-    }
+  // upload user image to storage and get url
+  const uploadUserImg = async file => await action.uploadToStorage(file, 'user/profile_img.webp');
+
+  // update user
+  const updateUser = async (user, data) => {
+    await action.put('users', user.uid, data);
+    dispatch({ type: 'UPDATE_USER', payload: data });
+    return data;
   };
 
-  // images
-  const getAllImages = async () => {
-    try {
-      const querySnapshot = await getDocs(collection(db, 'images'));
-      querySnapshot.forEach(doc => {
-        const img = { img: doc.data() };
-        setImages(prev => ({ ...prev, ...img[Object.keys(img)[0]] }));
-      });
-    } catch (err) {
-      con.fail({ code: err.code, msg: err.message });
-    }
+  // delete user image - must update corresponding document as succeeding action
+  const deleteUserImg = async () => {
+    await action.deleteFromStorage('user/profile_img.webp');
   };
-  // const imageReference = async child => {
-  //   const imagesRef = ref(storage, 'images');
-  //   let url= await getDownloadURL()
-  //   const dirList = await listAll(imagesRef);
 
-  //   dirList.prefixes.forEach(async dir => {
-  //     let list = await listAll(dir);
-  //     console.log(list);
-  //   });
-
-  //   dirList.items.forEach(async dir => {
-  //     let list = await listAll(dir);
-  //     console.log(list);
-  //   });
-  // };
-  useEffect(
-    () => () => dispatch({ type: 'GET_IMAGES', payload: images }),
-    [images]
-  );
-  return { addUser, getAllUsers, getAllImages };
+  useEffect(() => () => dispatch({ type: 'GET_IMAGES', payload: images }), [images]);
+  return { addUser, getAllUsers, getAllImages, uploadUserImg, updateUser, deleteUserImg };
 }

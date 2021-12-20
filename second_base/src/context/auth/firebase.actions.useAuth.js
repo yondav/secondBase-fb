@@ -10,7 +10,6 @@ import {
 import { UserContext } from './firebase.context.user';
 import { DataContext } from '../data/firebase.context.data';
 import useData from '../data/firebase.actions.useData';
-import { con } from '../../utils/console';
 
 const auth = getAuth();
 
@@ -29,11 +28,7 @@ export default function useAuth() {
     try {
       // if there is already a registered user, block new users
       if (user.length < 1) {
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
         const user = userCredential.user;
 
@@ -60,11 +55,7 @@ export default function useAuth() {
   // login
   const login = async ({ email, password }) => {
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
       const user = userCredential.user;
 

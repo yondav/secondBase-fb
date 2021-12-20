@@ -37,27 +37,21 @@ export const Links = styled.div(
 );
 
 const StyledLink = styled(Link)(({ active, name, invert }) => [
-  tw`pt-6 px-2 text-gray-500 hover:text-gray-50 transition duration-300`,
-  active === name && tw`text-gray-50 shadow-lg`,
+  tw`pt-6 px-2 text-gray-500 hover:text-gray-500 transition duration-300`,
+  active === name && tw`text-gray-500 shadow-lg`,
   invert && tw`text-gray-950 hover:text-gray-600`,
 ]);
 
 export const NavLink = ({ text, active, name, to, onClick, invert }) => (
   <>
-    <StyledLink
-      to={to}
-      name={name}
-      active={active}
-      onClick={onClick}
-      invert={invert}
-    >
+    <StyledLink to={to} name={name} active={active} onClick={onClick} invert={invert}>
       {text}
     </StyledLink>
   </>
 );
 
 export const Icon = styled.div(({ invert }) => [
-  tw`pt-6 px-2 text-lg text-gray-500 hover:text-gray-50 transition duration-300 cursor-pointer`,
+  tw`pt-6 px-2 text-lg text-gray-500 hover:text-gray-500 transition duration-300 cursor-pointer`,
   invert && tw`text-gray-950 hover:text-gray-600`,
 ]);
 

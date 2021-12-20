@@ -1,19 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
-import React, { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { DataContext } from '../../../../context/data/firebase.context.data';
-import { Grid, Img } from '../../../../styles';
-import { Outlet, useLocation } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Outlet, useLocation, Link } from 'react-router-dom';
+import { DataContext } from '../../../context/data/firebase.context.data';
+import { Grid, Img } from '../../../styles';
 
-const View = () => {
+const ProfileView = () => {
   const {
     state: {
       data: { user }, // add color prop to image container when image set up in db
     },
   } = useContext(DataContext);
 
-  useEffect(() => console.log(user), [user]);
   return (
     <>
       <Outlet />
@@ -31,6 +29,7 @@ const View = () => {
               <img
                 name='img'
                 src={
+                  user[0].profile_img.url ||
                   'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
                 }
                 alt='profile'
@@ -44,4 +43,4 @@ const View = () => {
   );
 };
 
-export default View;
+export default ProfileView;

@@ -20,12 +20,23 @@ export const Btn = styled.button(({ purple, tab, active }) => [
         background-position: right center;
       }
     `,
-  tab &&
-    css`
-      ${tw`w-full m-0 bg-gray-300	hover:bg-gray-150 dark:bg-gray-750 dark:hover:bg-gray-800 dark:text-gray-50 rounded-b-none`}
-      ${active && tw`bg-gray-50 dark:bg-gray-900`}
-    `,
 ]);
+
+// encountering a bug with dark mode on curr prop. This is a working solution though it sort of defeats the purpose of the library.
+const StyledTab = styled(Btn)(
+  tw`w-full m-0 bg-gray-300	hover:bg-gray-500 dark:bg-gray-800 dark:hover:bg-gray-850 dark:text-gray-500 rounded-b-none`
+);
+
+export const Tab = ({ children, curr, as, to }) =>
+  curr ? (
+    <StyledTab as={as} to={to} tw='bg-gray-500 dark:bg-gray-850 shadow-lg'>
+      {children}
+    </StyledTab>
+  ) : (
+    <StyledTab as={as} to={to}>
+      {children}
+    </StyledTab>
+  );
 
 export const Button = ({ children, ...rest }) => (
   <div tw='flex justify-end'>

@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import useAuth from '../../context/auth/firebase.actions.useAuth';
-
-import { Card, Grid, Form, Button } from '../../styles';
+import useAuth from '../context/auth/firebase.actions.useAuth';
+import { Card, Grid, Form, Button } from '../styles';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -33,7 +32,7 @@ const SignUpPage = () => {
               <Form.Label group htmlFor='first_name'>
                 First Name
               </Form.Label>
-              <Form.Input ref={register} type='text' name='first_name' />
+              <Form.Input id='first_name' ref={register} type='text' name='first_name' />
             </Form.Group>
           </Grid.Col>
           <Grid.Col split pad>
@@ -41,7 +40,7 @@ const SignUpPage = () => {
               <Form.Label group htmlFor='last_name'>
                 Last Name
               </Form.Label>
-              <Form.Input ref={register} type='text' name='last_name' />
+              <Form.Input id='last_name' ref={register} type='text' name='last_name' />
             </Form.Group>
           </Grid.Col>
           <Grid.Col split pad>
@@ -49,7 +48,7 @@ const SignUpPage = () => {
               <Form.Label group htmlFor='email'>
                 Email
               </Form.Label>
-              <Form.Input ref={register} type='email' name='email' />
+              <Form.Input id='email' ref={register} type='email' name='email' />
             </Form.Group>
           </Grid.Col>
           <Grid.Col split pad>
@@ -57,18 +56,8 @@ const SignUpPage = () => {
               <Form.Label group htmlFor='password'>
                 Password
               </Form.Label>
-              <Form.Input ref={register} type='password' name='password' />
+              <Form.Input id='password' ref={register} type='password' name='password' />
             </Form.Group>
-            {/* <Form.Group>
-              <Form.Label group htmlFor='confirm_password'>
-                Confirm Password
-              </Form.Label>
-              <Form.Input
-                ref={register}
-                type='password'
-                name='confirm_password'
-              />
-            </Form.Group> */}
           </Grid.Col>
         </Grid.Container>
         <Button type='submit' purple>

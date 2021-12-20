@@ -21,11 +21,11 @@ export const Hero = ({ url, color }) => (
 );
 
 export const Container = styled.div(({ square, circle, color }) => [
-  tw`overflow-hidden w-full rounded-lg`,
+  tw`relative overflow-hidden w-full rounded-lg`,
 
   square &&
     css`
-      ${tw`relative before:block`}
+      ${tw`before:block`}
 
       &:before {
         content: '';

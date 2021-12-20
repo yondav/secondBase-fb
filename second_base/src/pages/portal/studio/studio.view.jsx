@@ -1,7 +1,7 @@
 import React from 'react';
 
-const View = () => {
+const StudioView = () => {
   return <div>STUDIO</div>;
 };
 
-export default View;
+export default StudioView;
