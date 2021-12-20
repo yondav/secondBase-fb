@@ -37,7 +37,7 @@ const Uploader = ({ single, images, uploadTask }) => {
   return (
     <div
       {...getRootProps({ className: 'dropzone' })}
-      tw='flex h-96 mx-36 justify-center items-center p-5 cursor-pointer bg-gray-150 dark:bg-gray-900 rounded-lg hover:shadow-lg transition-all duration-300 ease-in-out'
+      tw='flex h-96 md:mx-24 lg:mx-36 justify-center items-center p-5 cursor-pointer bg-gray-150 dark:bg-gray-900 rounded-lg hover:shadow-lg transition-all duration-300 ease-in-out'
     >
       {!isLoading ? (
         <>

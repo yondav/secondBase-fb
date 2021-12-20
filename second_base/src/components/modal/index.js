@@ -6,7 +6,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { Card } from '../../styles';
 import { fade } from '../../utils/framer';
 
-const Modal = ({ children, handleClose, isOpen }) => {
+const Modal = ({ children, handleClose, isOpen, dialogue }) => {
   return (
     <AnimatePresence>
       {!!isOpen && (
@@ -21,6 +21,7 @@ const Modal = ({ children, handleClose, isOpen }) => {
           />
           <Card.Base
             modal={1}
+            dialogue={dialogue}
             initial={fade.hidden}
             animate={fade.visible(1)}
             exit={fade.hidden}

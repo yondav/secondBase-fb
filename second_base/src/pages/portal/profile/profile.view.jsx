@@ -24,7 +24,7 @@ const ProfileView = () => {
               state={{ from: useLocation().pathname }}
               square={1}
               circle={1}
-              tw='sm:w-2/3 lg:w-1/2 xl:w-1/3 cursor-pointer'
+              tw='sm:w-2/3 lg:w-1/2 xl:w-1/3'
             >
               <img
                 name='img'
@@ -33,7 +33,7 @@ const ProfileView = () => {
                   'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
                 }
                 alt='profile'
-                tw='h-full w-auto max-w-none'
+                tw='h-full w-auto max-w-none cursor-pointer hover:opacity-60 transition-all duration-300 ease-in'
               />
             </Img.Container>
           </div>

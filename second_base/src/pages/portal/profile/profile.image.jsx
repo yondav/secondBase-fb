@@ -1,15 +1,18 @@
 /** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
 import React, { useState, useContext, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { DataContext } from '../../../context/data/firebase.context.data';
 import useData from '../../../context/data/firebase.actions.useData';
-import { Grid, Img } from '../../../styles';
+import { Grid, Img, Btn } from '../../../styles';
 
-import { Forms } from '../../../components';
+import { Forms, Modal, Dialogue } from '../../../components';
 
 const ProfileImg = () => {
   const [uploader, setUploader] = useState(false);
+  const [imgHover, setImgHover] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const { uploadUserImg, updateUser, deleteUserImg } = useData();
   const {
     state: {
@@ -42,25 +45,29 @@ const ProfileImg = () => {
     await updateImg({ color: false, photographer: '', url: '' });
   };
 
-  useEffect(() => {
-    console.log(uploader);
-    !profile_img.url ? setUploader(true) : setUploader(false);
-    console.log(uploader);
-  }, [profile_img.url]);
+  useEffect(() => (!profile_img.url ? setUploader(true) : setUploader(false)), [profile_img.url]);
   return (
     <Grid.Container tw='pb-6'>
       {!uploader ? (
         <>
           <div tw='col-span-12 lg:col-span-8'>
-            <Img.Container color={`+${profile_img.color}`}>
+            <Img.Container
+              color={`+${profile_img.color}`}
+              onMouseEnter={() => setImgHover(true)}
+              onMouseLeave={() => setImgHover(false)}
+            >
               <img
                 src={profile_img.url}
                 alt='profile image'
-                style={{ filter: !profile_img.color && 'saturate(0)' }}
+                style={{ filter: !profile_img.color && 'saturate(0)', opacity: imgHover && 0.6 }}
+                tw='transition-all duration-300 ease-in'
               />
-              <div tw='absolute top-0 left-0 h-full w-full flex justify-center items-center bg-gray-100 text-red-900 opacity-0 hover:opacity-90 dark:hover:bg-gray-950 transition duration-500 ease-in'>
-                <AiOutlineDelete tw='cursor-pointer' size='5em' onClick={deleteImg} />
-              </div>
+              {imgHover && <Img.DeleteOverlay dialogueAction={() => setConfirmDelete(true)} />}
+              <Dialogue.ConfirmDelete
+                isOpen={confirmDelete}
+                handleClose={() => setConfirmDelete(false)}
+                deleteTask={deleteImg}
+              />
             </Img.Container>
           </div>
           <div tw='col-span-12 lg:col-span-4'>

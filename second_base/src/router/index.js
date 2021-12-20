@@ -23,6 +23,7 @@ const ArtistsView = React.lazy(() => import('../pages/portal/artists/artists.vie
 const GearView = React.lazy(() => import('../pages/portal/gear/gear.view'));
 const ProfileView = React.lazy(() => import('../pages/portal/profile/profile.view'));
 const ProfileImg = React.lazy(() => import('../pages/portal/profile/profile.image'));
+const ProfileBio = React.lazy(() => import('../pages/portal/profile/profile.image'));
 const StudioView = React.lazy(() => import('../pages/portal/studio/studio.view'));
 
 // 404
@@ -120,7 +121,7 @@ const SiteMap = () => {
               path='bio'
               element={
                 <LazyLoad>
-                  <div>BIO</div>
+                  <ProfileImg />ß
                 </LazyLoad>
               }
             />
