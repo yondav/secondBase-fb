@@ -2,6 +2,7 @@ import tw, { styled, css } from 'twin.macro';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
+// navbar and nested styles
 const NavBar = styled(motion.nav)(({ dark, sticky }) => [
   css`
     & .inner-nav-wrap {
@@ -26,12 +27,14 @@ const NavBar = styled(motion.nav)(({ dark, sticky }) => [
   sticky && tw`fixed z-10`,
 ]);
 
+// export component will become more useful for sticky logic
 export const Bar = ({ dark, sticky, children }) => (
   <NavBar dark={dark ? 1 : 2} sticky={sticky ? 1 : 2}>
     <div className='inner-nav-wrap'>{children}</div>
   </NavBar>
 );
 
+// nav link styles
 export const Links = styled.div(
   tw`hidden lg:flex items-center space-x-1 transition-all duration-300 ease-in-out`
 );
@@ -50,6 +53,7 @@ export const NavLink = ({ text, active, name, to, onClick, invert }) => (
   </>
 );
 
+// icon styles and hanburger for mobile
 export const Icon = styled.div(({ invert }) => [
   tw`pt-6 px-2 text-lg text-gray-500 hover:text-gray-500 transition duration-300 cursor-pointer`,
   invert && tw`text-gray-950 hover:text-gray-600`,
@@ -79,4 +83,5 @@ export const Burger = ({ active, onClick }) => (
   </Hamburger>
 );
 
+// side nav for mobile
 export const SideNav = styled(motion.div)(tw`bg-gray-900 flex justify-end`);

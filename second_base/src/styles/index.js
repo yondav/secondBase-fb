@@ -6,3 +6,4 @@ export * as Img from './styled.images';
 export { StyledFooter } from './styled.footer';
 export { Button, Btn, Tab } from './styled.buttons';
 export { WrapApp } from './styled.container';
+export { Overlay, DeleteOverlay } from './styled.overlay';

@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import useNavigateBelow from '../hooks/useNavigateBelow';
 import { Modal } from '../components';
 
 const ModalRouter = () => {
   const [isOpen, setIsopen] = useState(true);
-  const location = useLocation();
-  const navigate = useNavigate();
+  const navigatBelow = useNavigateBelow();
 
   const handleClose = () => {
     setIsopen(false);
-    setTimeout(() => navigate(location.state.from), 500);
+    setTimeout(() => navigatBelow(), 500);
   };
 
-  useEffect(() => console.log(location), [location]);
   return (
     <Modal handleClose={handleClose} isOpen={isOpen}>
       <Outlet />

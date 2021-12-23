@@ -2,6 +2,7 @@
 import tw, { styled, css } from 'twin.macro';
 import { motion } from 'framer-motion';
 
+// card component. props for versatility
 export const Base = styled(motion.div)(({ login, full, modal, dialogue }) => [
   tw`relative p-4 flex flex-col bg-gray-300 dark:bg-gray-950 m-auto container rounded-md w-full overflow-hidden transition-all duration-300 ease-in-out`,
 

@@ -1,15 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
 import React, { useState, useContext, useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { AiOutlineDelete } from 'react-icons/ai';
+import useNavigateBelow from '../../../hooks/useNavigateBelow';
 import { DataContext } from '../../../context/data/firebase.context.data';
 import useData from '../../../context/data/firebase.actions.useData';
-import { Grid, Img, Btn } from '../../../styles';
+import { Grid, Img, DeleteOverlay } from '../../../styles';
 
-import { Forms, Modal, Dialogue } from '../../../components';
+import { Forms, Dialogue } from '../../../components';
 
 const ProfileImg = () => {
+  const navigateBelow = useNavigateBelow();
   const [uploader, setUploader] = useState(false);
   const [imgHover, setImgHover] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -34,10 +34,12 @@ const ProfileImg = () => {
   };
 
   const updateImg = async data => {
-    const update = await updateUser(user[0], {
+    const res = await updateUser(user[0], {
       ...user[0],
       profile_img: { ...user[0].profile_img, ...data },
     });
+
+    if (res) setTimeout(() => navigateBelow(), 500);
   };
 
   const deleteImg = async () => {
@@ -62,7 +64,7 @@ const ProfileImg = () => {
                 style={{ filter: !profile_img.color && 'saturate(0)', opacity: imgHover && 0.6 }}
                 tw='transition-all duration-300 ease-in'
               />
-              {imgHover && <Img.DeleteOverlay dialogueAction={() => setConfirmDelete(true)} />}
+              {imgHover && <DeleteOverlay dialogueAction={() => setConfirmDelete(true)} />}
               <Dialogue.ConfirmDelete
                 isOpen={confirmDelete}
                 handleClose={() => setConfirmDelete(false)}

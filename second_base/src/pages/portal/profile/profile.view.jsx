@@ -1,9 +1,17 @@
 /** @jsxImportSource @emotion/react */
-import tw from 'twin.macro';
-import React, { useContext } from 'react';
+import tw, { styled } from 'twin.macro';
+import React, { useContext, useEffect } from 'react';
 import { Outlet, useLocation, Link } from 'react-router-dom';
+import { AiOutlineEdit } from 'react-icons/ai';
 import { DataContext } from '../../../context/data/firebase.context.data';
 import { Grid, Img } from '../../../styles';
+
+const Bio = styled.article`
+  ${tw`mt-3`}
+  & > * {
+    ${tw`mb-2 text-justify`}
+  }
+`;
 
 const ProfileView = () => {
   const {
@@ -12,6 +20,17 @@ const ProfileView = () => {
     },
   } = useContext(DataContext);
 
+  const renderBio = () => {
+    let bioEl = document.querySelector('.portal-bio');
+    console.log(bioEl);
+    let bio = user[0].bio.html;
+    console.log(JSON.parse(JSON.stringify(bio)));
+    bio
+      ? (bioEl.innerHTML = JSON.parse(JSON.stringify(bio)))
+      : (bioEl.innerHTML = 'add bio for about page');
+  };
+
+  useEffect(() => renderBio(), [user[0].bio]);
   return (
     <>
       <Outlet />
@@ -36,6 +55,19 @@ const ProfileView = () => {
                 tw='h-full w-auto max-w-none cursor-pointer hover:opacity-60 transition-all duration-300 ease-in'
               />
             </Img.Container>
+          </div>
+        </Grid.Col>
+        <Grid.Col pad>
+          <div tw='flex justify-between flex-col relative'>
+            <Link to='edit/bio' state={{ from: useLocation().pathname }}>
+              <AiOutlineEdit
+                size='2em'
+                tw='absolute top-0 right-0 text-blue-900 hover:text-blue-900 dark:(text-blue-700 hover:text-blue-900) transition-all duration-300 ease-in'
+              />
+            </Link>
+            <h1>{user[0].name}</h1>
+            <p>{user[0].email}</p>
+            <Bio className='portal-bio'></Bio>
           </div>
         </Grid.Col>
       </Grid.Container>

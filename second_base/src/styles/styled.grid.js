@@ -1,5 +1,6 @@
 import tw, { styled } from 'twin.macro';
 
+// grid styles limited logic on columns. use classes directly in component for more complex layouts
 export const Container = styled.div(({ pad, screen, full }) => [
   tw`grid grid-cols-12`,
 
