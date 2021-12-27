@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import tw, { styled } from 'twin.macro';
+import tw from 'twin.macro';
 import React, { useState, useEffect, useRef } from 'react';
 import {
   EditorState,
@@ -15,11 +15,11 @@ import draftToHtml from 'draftjs-to-html';
 import { onAddLink, createLinkDecorator } from './draft.linkEntity';
 import { InlineBtns, BlockBtns, HeadingBtns, link } from './toolbar';
 import { InputDialogue } from '../../dialogue';
-import { Form, Button } from '../../../styles';
+// import { Form, Button } from '../../../styles';
+import { Form } from '..';
+import { RichStyles } from './styled';
 
-const {
-  RichText: { Wrapper, Container, Toolbar },
-} = Form;
+const { Wrapper, Container, Toolbar } = RichStyles;
 
 const RichText = ({ handleSubmit, data }) => {
   const ref = useRef(null);
@@ -118,9 +118,11 @@ const RichText = ({ handleSubmit, data }) => {
             </Container>
           </Wrapper>
         </Form.Group>
-        <Button type='submit' purple>
-          Save
-        </Button>
+        <div tw='flex justify-end'>
+          <Form.Button type='submit' purple>
+            Save
+          </Form.Button>
+        </div>
       </form>
     </>
   );

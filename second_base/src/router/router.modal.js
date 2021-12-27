@@ -9,7 +9,9 @@ const ModalRouter = () => {
 
   const handleClose = () => {
     setIsopen(false);
-    setTimeout(() => navigatBelow(), 500);
+    setTimeout(() => {
+      navigatBelow();
+    }, 500);
   };
 
   return (

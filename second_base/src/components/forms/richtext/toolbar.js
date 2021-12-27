@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import tw, { styled } from 'twin.macro';
+import tw from 'twin.macro';
 import React, { useState } from 'react';
 import { RichUtils } from 'draft-js';
 import {
@@ -11,11 +11,9 @@ import {
 import { RiHeading, RiFontSize2 } from 'react-icons/ri';
 import { GoQuote } from 'react-icons/go';
 import { FiBold, FiItalic, FiUnderline } from 'react-icons/fi';
-import { Form } from '../../../styles';
+import { RichStyles } from './styled';
 
-const {
-  RichText: { Toolbar },
-} = Form;
+const { Toolbar } = RichStyles;
 
 const inlineBtns = [
   { command: 'BOLD', icon: FiBold },

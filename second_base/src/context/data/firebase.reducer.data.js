@@ -22,10 +22,16 @@ export default function dataReducer(state, { type, payload }) {
         data: { ...state.data, user: [payload] },
       };
     case 'GET_IMAGES':
-      con.success('** IMAGE FETCHED **');
+      con.success('** IMAGES FETCHED **');
       return {
         ...state,
-        data: { ...state.data, images: { ...state.data.images, ...payload } },
+        data: { ...state.data, images: payload },
+      };
+    case 'GET_STUDIO':
+      con.success('*** STUDIO INFO FETCHED **');
+      return {
+        ...state,
+        data: { ...state.data, studio: payload },
       };
     default:
       return state;

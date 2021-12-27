@@ -25,7 +25,7 @@ export const drawPath = repeat => ({
 export const fade = {
   hidden: { opacity: 0 },
   visible: opacity => ({ opacity }),
-  transition: duration => ({ duration, ease: 'easeInOut' }),
+  transition: (duration, delay) => ({ duration, delay, ease: 'easeInOut' }),
 };
 
 // grow from 0 height to element height - modal, accordian section

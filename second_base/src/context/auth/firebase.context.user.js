@@ -15,9 +15,7 @@ const userReducer = (state, action) => {
       con.success(`** AUTHENTICATED ** uid:${action.payload.uid}`);
       return { user: action.payload, err: null };
     case 'NOT_AUTHENTICATED':
-      con.fail(
-        `** NOT AUTHENTICATED ** ERR:${action.payload.code}, MSG: ${action.payload.msg}`
-      );
+      con.fail(`** NOT AUTHENTICATED ** ERR:${action.payload}`);
       return { user: null, err: action.payload };
     default:
       return state;
@@ -31,8 +29,7 @@ export const UserProvider = ({ children }) => {
     const auth = getAuth();
 
     // first check if there is an authenticated user
-    auth.currentUser &&
-      dispatch({ type: 'AUTHENTICATED', payload: auth.currentUser });
+    auth.currentUser && dispatch({ type: 'AUTHENTICATED', payload: auth.currentUser });
 
     // then listen for changes in authentication
     onAuthStateChanged(auth, user =>
@@ -45,9 +42,5 @@ export const UserProvider = ({ children }) => {
     );
   }, []);
 
-  return (
-    <UserContext.Provider value={{ state, dispatch }}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={{ state, dispatch }}>{children}</UserContext.Provider>;
 };

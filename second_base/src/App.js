@@ -1,25 +1,22 @@
 import { useEffect, useContext } from 'react';
-import { Routes, Route } from 'react-router-dom';
 import './firebase/firebase.config';
 
 import useData from './context/data/firebase.actions.useData';
 import { DataContext } from './context/data/firebase.context.data';
-
-import * as Router from './router';
-
 import { Navbar, Footer } from './components';
-import { WrapApp } from './styles';
+import { WrapApp } from './components/layout';
 import { con } from './utils/console';
 
 import SiteMap from './router';
 
 function App() {
   const { state } = useContext(DataContext);
-  const { getAllUsers, getAllImages } = useData();
+  const { getAll } = useData();
 
   const fetch = async () => {
-    await getAllUsers();
-    await getAllImages();
+    await getAll('users', 'GET_USERS'); // fetch users
+    await getAll('images', 'GET_IMAGES'); // fetch images
+    await getAll('studio', 'GET_STUDIO'); // fetch studio info
   };
 
   useEffect(() => fetch(), []);

@@ -1,15 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import tw, { styled } from 'twin.macro';
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Outlet, useLocation, Link } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { DataContext } from '../../../context/data/firebase.context.data';
-import { Grid, Img } from '../../../styles';
+import { Container } from '../../../components/image';
+import { Grid } from '../../../components/layout';
 
 const Bio = styled.article`
   ${tw`mt-3`}
   & > * {
-    ${tw`mb-2 text-justify`}
+    ${tw`mb-4 text-justify`}
   }
 `;
 
@@ -34,10 +35,10 @@ const ProfileView = () => {
   return (
     <>
       <Outlet />
-      <Grid.Container pad screen>
+      <Grid.Container pad>
         <Grid.Col>
           <div tw='flex justify-center'>
-            <Img.Container
+            <Container
               as={Link}
               to='edit/img'
               state={{ from: useLocation().pathname }}
@@ -54,7 +55,7 @@ const ProfileView = () => {
                 alt='profile'
                 tw='h-full w-auto max-w-none cursor-pointer hover:opacity-60 transition-all duration-300 ease-in'
               />
-            </Img.Container>
+            </Container>
           </div>
         </Grid.Col>
         <Grid.Col pad>

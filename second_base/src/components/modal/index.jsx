@@ -1,9 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
-import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { AiOutlineClose } from 'react-icons/ai';
-import { Card } from '../../styles';
+import Card from '../layout/card';
 import { fade } from '../../utils/framer';
 
 const Modal = ({ children, handleClose, isOpen, dialogue }) => {

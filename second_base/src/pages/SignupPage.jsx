@@ -1,9 +1,12 @@
-import React from 'react';
+/** @jsxImportSource @emotion/react */
+import tw from 'twin.macro';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import useAuth from '../context/auth/firebase.actions.useAuth';
-import { Card, Grid, Form, Button } from '../styles';
+import { Grid } from '../components/layout';
+import { Card } from '../components/layout';
+import { Form } from '../components/forms';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -60,9 +63,11 @@ const SignUpPage = () => {
             </Form.Group>
           </Grid.Col>
         </Grid.Container>
-        <Button type='submit' purple>
-          Sign up
-        </Button>
+        <div tw='flex justify-end'>
+          <Form.Button type='submit' purple>
+            Sign up
+          </Form.Button>
+        </div>
       </form>
     </Card.Base>
   );

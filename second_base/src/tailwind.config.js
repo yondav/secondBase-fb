@@ -6,6 +6,7 @@ module.exports = {
       header: ['acumin-pro', 'sans-serif'],
     },
     colors: {
+      current: 'currentColor',
       gray: {
         50: '#fbfbfb',
         100: '#f8f8f7',

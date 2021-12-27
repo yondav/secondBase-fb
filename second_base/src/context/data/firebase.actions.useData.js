@@ -7,20 +7,11 @@ export default function useData() {
   const { dispatch } = useContext(DataContext);
   const [images, setImages] = useState({});
 
-  // get all users
-  const getAllUsers = async () => {
-    const querySnapshot = await action.fetchAll('users');
+  // get all
+  const getAll = async (collection, type = null) => {
+    const querySnapshot = await action.fetchAll(collection);
     querySnapshot.forEach(doc => {
-      dispatch({ type: 'GET_USERS', payload: doc.data() });
-    });
-  };
-
-  // get all images
-  const getAllImages = async () => {
-    const querySnapshot = await action.fetchAll('images');
-    querySnapshot.forEach(doc => {
-      const img = { img: doc.data() };
-      setImages(prev => ({ ...prev, ...img[Object.keys(img)[0]] }));
+      dispatch({ type, payload: doc.data() });
     });
   };
 
@@ -28,7 +19,7 @@ export default function useData() {
   // add user (only called when user is registered in useAuth)
   const addUser = async user => {
     const newUser = await action.post('users', user.uid, userModel(user));
-    if (newUser) await getAllUsers();
+    if (newUser) await getAll('users', 'GET_USERS');
   };
 
   // upload user image to storage and get url
@@ -46,6 +37,6 @@ export default function useData() {
     await action.deleteFromStorage('user/profile_img.webp');
   };
 
-  useEffect(() => () => dispatch({ type: 'GET_IMAGES', payload: images }), [images]);
-  return { addUser, getAllUsers, getAllImages, uploadUserImg, updateUser, deleteUserImg };
+  // useEffect(() => () => dispatch({ type: 'GET_IMAGES', payload: images }), [images]);
+  return { addUser, getAll, uploadUserImg, updateUser, deleteUserImg };
 }

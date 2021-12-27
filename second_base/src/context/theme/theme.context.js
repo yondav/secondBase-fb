@@ -1,44 +1,24 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export const ThemeContext = React.createContext();
 
 const savedTheme = localStorage.getItem('dark');
-let initialState = { dark: JSON.parse(savedTheme) || false };
-
-const themeReducer = (state, action) => {
-  switch (action.type) {
-    case 'DARK':
-      return { dark: true };
-    case 'LIGHT':
-      return { dark: false };
-    default:
-      return state;
-  }
-};
 
 export const ThemeProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(themeReducer, initialState);
+  const [dark, setDark] = useState(JSON.parse(savedTheme) || false);
   const HTML = document.querySelector('html').classList;
 
-  const toggleTheme = () => {
-    HTML.toggle('dark');
-
-    if (HTML.contains('dark')) {
-      dispatch({ type: 'DARK' });
-      localStorage.setItem('dark', true);
-    } else {
-      dispatch({ type: 'LIGHT' });
-      localStorage.setItem('dark', false);
-    }
-
-    console.log(state);
-  };
+  const toggleTheme = () => setDark(!dark);
 
   useEffect(() => {
-    if (initialState.dark) {
-      HTML.toggle('dark');
+    if (dark) {
+      HTML.add('dark');
+      localStorage.setItem('dark', true);
+    } else {
+      HTML.remove('dark');
+      localStorage.setItem('dark', false);
     }
-  }, []);
+  }, [dark]);
 
-  return <ThemeContext.Provider value={{ toggleTheme, state }}>{children}</ThemeContext.Provider>;
+  return <ThemeContext.Provider value={{ dark, toggleTheme }}>{children}</ThemeContext.Provider>;
 };

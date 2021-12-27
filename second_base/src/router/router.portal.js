@@ -1,21 +1,28 @@
 /** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import { Outlet, useLocation, Navigate, Link } from 'react-router-dom';
 import { DataContext } from '../context/data/firebase.context.data';
 import useAuth from '../context/auth/firebase.actions.useAuth';
 import { toTitle } from '../utils/helpers';
 import { Spinner } from '../components';
-import { Img, Card, Tab } from '../styles';
+import { Hero } from '../components/image';
+import { Card, Tab } from '../components/layout';
+import { motion, useViewportScroll } from 'framer-motion';
 
 const routes = [{ to: 'profile' }, { to: 'studio' }, { to: 'gear' }, { to: 'artists' }];
 
 const PortalRouter = () => {
+  const { scrollYProgress } = useViewportScroll();
+  const mainRef = useRef(null);
   const { pathname } = useLocation();
+  const [mainScrollPos, setMainScrollPos] = useState(
+    !!mainRef.current ? mainRef.current.offsetTop : 821
+  );
   const [isLoading, setLoading] = useState(true);
   const [active, setActive] = useState('profile');
   const {
-    state: { user },
+    state: { user, err },
   } = useAuth();
   const {
     state: {
@@ -27,16 +34,25 @@ const PortalRouter = () => {
 
   useEffect(() => !!portal && setLoading(false), [portal]);
   useEffect(() => setActive(pathname.split('/')[pathname.split('/').length - 1]), [pathname]);
+  useEffect(
+    () => mainRef.current && setMainScrollPos(mainRef.current.offsetTop),
+    [mainRef.current]
+  );
 
   return (
     <>
-      {!!user ? (
+      {!!err && <Navigate to='/admin/login' />}
+      {!!user && (
         <>
           {!isLoading ? (
             <>
               {pathname === '/admin/portal' && <Navigate to='profile' />}
-              <Img.Hero url={portal.hero.url} color={portal.hero.color} />
-              <Card.Base full={1}>
+              <Hero
+                url={portal.hero.url}
+                color={portal.hero.color}
+                onScroll={() => window.scroll({ top: mainScrollPos, behavior: 'smooth' })}
+              />
+              <Card.Base full={1} innerRef={mainRef}>
                 <Card.Header tw='p-0'>
                   <div tw='flex'>
                     {routes.map((route, i) => {
@@ -48,17 +64,17 @@ const PortalRouter = () => {
                     })}
                   </div>
                 </Card.Header>
+                <Card.Body>
+                  <motion.div style={{ opacity: scrollYProgress }}>
+                    <Outlet />
+                  </motion.div>
+                </Card.Body>
               </Card.Base>
-              <Card.Body>
-                <Outlet />
-              </Card.Body>
             </>
           ) : (
             <Spinner />
           )}
         </>
-      ) : (
-        <Navigate to='/admin/login' />
       )}
     </>
   );

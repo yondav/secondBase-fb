@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+/** @jsxImportSource @emotion/react */
+import tw from 'twin.macro';
+import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import useAuth from '../context/auth/firebase.actions.useAuth';
 
 import { Spinner } from '../components';
-import { Card, Form, Button } from '../styles';
+import Card from '../components/layout/card';
+import { Form } from '../components/forms';
 
 const LoginPage = () => {
   const {
@@ -49,7 +52,9 @@ const LoginPage = () => {
                   </Form.Label>
                   <Form.Input id='password' ref={register} type='password' name='password' />
                 </Form.Group>
-                <Button purple>Login</Button>
+                <div tw='flex justify-end'>
+                  <Form.Button purple>Login</Form.Button>
+                </div>
               </form>
             </Card.Body>
           ) : (

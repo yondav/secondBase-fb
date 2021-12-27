@@ -1,5 +1,5 @@
-import React, { Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { Suspense, useEffect } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { Spinner } from '../components';
 
 // Routing outlets
@@ -32,6 +32,16 @@ const ErrorPage = React.lazy(() => import('../pages/ErrorPage'));
 const LazyLoad = ({ children }) => <Suspense fallback={<Spinner />}>{children}</Suspense>;
 
 const SiteMap = () => {
+  // const { pathname } = useLocation();
+  // useEffect(() => {
+  //   if (pathname.includes('edit')) {
+  //     document.body.style.height = '100vh';
+  //     document.body.style.overflow = 'hidden';
+  //   } else {
+  //     document.body.style.height = '';
+  //     document.body.style.overflow = '';
+  //   }
+  // }, [pathname]);
   return (
     <Routes>
       {/* client routes */}

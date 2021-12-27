@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { IoIosCloudUpload } from 'react-icons/io';
 import { con } from '../../../utils/console';
 import Spinner from '../../spinner';
 import { compressFile } from './actions';
-import { Form } from '../../../styles';
+import { Form } from '..';
 
 const Uploader = ({ single, images, uploadTask }) => {
   const [isLoading, setIsLoading] = useState(false);

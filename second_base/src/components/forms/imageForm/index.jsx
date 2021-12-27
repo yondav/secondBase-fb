@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+/** @jsxImportSource @emotion/react */
+import tw from 'twin.macro';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Grid, Form, Button } from '../../../styles';
+import { Grid } from '../../layout';
+import { Form } from '..';
 
 const ImageForm = ({ updateTask, img }) => {
   const [isLoading, setLoading] = useState(false);
@@ -38,9 +41,11 @@ const ImageForm = ({ updateTask, img }) => {
         </Grid.Col>
       </Grid.Container>
       <Grid.Col>
-        <Button purple type='submit'>
-          Save
-        </Button>
+        <div tw='flex justify-end'>
+          <Form.Button purple type='submit'>
+            Save
+          </Form.Button>
+        </div>
       </Grid.Col>
     </form>
   );

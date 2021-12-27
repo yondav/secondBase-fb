@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Modal from '../modal';
-import { Btn, Form } from '../../styles';
+import { Form } from '../forms';
 import { toTitle } from '../../utils/helpers';
 
 const InputDialogue = ({ isOpen, handleClose, form }) => {
@@ -27,8 +27,8 @@ const InputDialogue = ({ isOpen, handleClose, form }) => {
         </Form.Group>
       ))}
       <div tw='flex justify-end'>
-        <Btn onClick={handleClose}>Cancel</Btn>
-        <Btn
+        <Form.Button onClick={handleClose}>Cancel</Form.Button>
+        <Form.Button
           onMouseDown={() => {
             form.task(inputVal);
             handleClose();
@@ -36,7 +36,7 @@ const InputDialogue = ({ isOpen, handleClose, form }) => {
           purple
         >
           Save
-        </Btn>
+        </Form.Button>
       </div>
     </Modal>
   );

@@ -1,14 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
-import {
-  RiContrast2Line,
-  RiContrast2Fill,
-  RiInstagramLine,
-  RiInstagramFill,
-} from 'react-icons/ri';
+import { RiContrast2Line, RiContrast2Fill, RiInstagramLine, RiInstagramFill } from 'react-icons/ri';
 
 import useAuth from '../../context/auth/firebase.actions.useAuth';
-import { Nav } from '../../styles';
+import * as Nav from '../navbar/styled';
 import { pageLinks, adminLinks } from '../navbar/linksObs';
 import { toTitle } from '../../utils/helpers';
 
@@ -21,7 +16,7 @@ const Links = ({ dark, toggleTheme }) => {
     <>
       <div tw='flex h-full'>
         {pageLinks.map((pg, i) => (
-          <Nav.NavLink
+          <Nav.Link
             key={i}
             to={`/${pg.name}`}
             text={toTitle(pg.name)}
@@ -33,7 +28,7 @@ const Links = ({ dark, toggleTheme }) => {
       <div tw='flex h-full'>
         {!!user &&
           adminLinks(logout).map((pg, i) => (
-            <Nav.NavLink
+            <Nav.Link
               key={i}
               to={pg.to}
               text={toTitle(pg.name)}
