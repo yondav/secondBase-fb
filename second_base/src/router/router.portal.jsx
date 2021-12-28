@@ -8,12 +8,10 @@ import { toTitle } from '../utils/helpers';
 import { Spinner } from '../components';
 import { Hero } from '../components/image';
 import { Card, Tab } from '../components/layout';
-import { motion, useViewportScroll } from 'framer-motion';
 
 const routes = [{ to: 'profile' }, { to: 'studio' }, { to: 'gear' }, { to: 'artists' }];
 
 const PortalRouter = () => {
-  const { scrollYProgress } = useViewportScroll();
   const mainRef = useRef(null);
   const { pathname } = useLocation();
   const [mainScrollPos, setMainScrollPos] = useState(
@@ -57,7 +55,7 @@ const PortalRouter = () => {
                   <div tw='flex'>
                     {routes.map((route, i) => {
                       return (
-                        <Tab key={i} as={Link} to={route.to} curr={route.to === active ? 1 : 0}>
+                        <Tab key={i} as={Link} to={route.to} curr={route.to === active}>
                           {toTitle(route.to)}
                         </Tab>
                       );
@@ -65,9 +63,9 @@ const PortalRouter = () => {
                   </div>
                 </Card.Header>
                 <Card.Body>
-                  <motion.div style={{ opacity: scrollYProgress }}>
+                  <div>
                     <Outlet />
-                  </motion.div>
+                  </div>
                 </Card.Body>
               </Card.Base>
             </>

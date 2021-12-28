@@ -1,11 +1,10 @@
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { DataContext } from './firebase.context.data';
 import { userModel } from '../../firebase/firebase.models';
 import * as action from '../../firebase/firebase.tasks';
 
 export default function useData() {
-  const { dispatch } = useContext(DataContext);
-  const [images, setImages] = useState({});
+  const { state, dispatch } = useContext(DataContext);
 
   // get all
   const getAll = async (collection, type = null) => {
@@ -37,6 +36,13 @@ export default function useData() {
     await action.deleteFromStorage('user/profile_img.webp');
   };
 
+  // non user images
+  const uploadImage = async (file, path) => await action.uploadToStorage(file, `${path}.webp`);
+
+  const updateImage = async data => {
+    await action.put('images', 'r27hUzvhqntH6iwSRiyX', { ...state.data.images, ...data });
+  };
+
   // useEffect(() => () => dispatch({ type: 'GET_IMAGES', payload: images }), [images]);
-  return { addUser, getAll, uploadUserImg, updateUser, deleteUserImg };
+  return { addUser, getAll, uploadUserImg, updateUser, deleteUserImg, updateImage, uploadImage };
 }

@@ -14,7 +14,7 @@ import draftToHtml from 'draftjs-to-html';
 // import htmlToDraft from 'html-to-draftjs';
 import { onAddLink, createLinkDecorator } from './draft.linkEntity';
 import { InlineBtns, BlockBtns, HeadingBtns, link } from './toolbar';
-import { InputDialogue } from '../../dialogue';
+import Dialogue from '../../dialogue';
 // import { Form, Button } from '../../../styles';
 import { Form } from '..';
 import { RichStyles } from './styled';
@@ -86,7 +86,7 @@ const RichText = ({ handleSubmit, data }) => {
   return (
     <>
       {linkDialogue && (
-        <InputDialogue
+        <Dialogue.Input
           isOpen={linkDialogue}
           handleClose={() => setLinkDialogue(false)}
           form={linkForm}

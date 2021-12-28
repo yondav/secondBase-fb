@@ -14,9 +14,9 @@ const HeroStyles = styled.div`
 const Hero = ({ url, color, onScroll }) => (
   <HeroStyles>
     <motion.div
-      initial={{ scale: 1.3, opacity: 0 }}
-      animate={{ scale: [1.1, 1, 1.05], opacity: 1 }}
-      transition={{ duration: 1.6, ease: 'easeIn' }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, ease: 'easeIn' }}
       className='hero-inner'
       style={{
         backgroundImage: `url(${url})`,

@@ -1,2 +1,6 @@
-export { default as ConfirmDelete } from './delete';
-export { default as InputDialogue } from './input.dialogue';
+import Delete from './delete';
+import Input from './input.dialogue';
+
+const Dialogue = { Delete, Input };
+
+export default Dialogue;

@@ -79,7 +79,7 @@ const ProfileImg = () => {
           <>
             <div tw='col-span-12 lg:col-span-8'>
               <Container
-                color={`+${profile_img.color}`}
+                color={profile_img.color}
                 onMouseEnter={() => setImgHover(true)}
                 onMouseLeave={() => setImgHover(false)}
               >
@@ -90,7 +90,7 @@ const ProfileImg = () => {
                   tw='transition-all duration-300 ease-in'
                 />
                 {imgHover && <DeleteOverlay dialogueAction={() => setConfirmDelete(true)} />}
-                <Dialogue.ConfirmDelete
+                <Dialogue.Delete
                   isOpen={confirmDelete}
                   handleClose={() => setConfirmDelete(false)}
                   deleteTask={deleteImg}

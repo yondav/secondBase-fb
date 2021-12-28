@@ -7,7 +7,6 @@ import { DataContext } from '../../../context/data/firebase.context.data';
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 // import 'pure-react-carousel/dist/react-carousel.es.css';
 import { Grid } from '../../../components/layout';
-import { AiOutlineEdit } from 'react-icons/ai';
 
 const StudioView = () => {
   const {
@@ -31,7 +30,12 @@ const StudioView = () => {
     return (
       <>
         {temp.map((img, i) => (
-          <Slide index={i} key={i} style={{ paddingBottom: '1.25rem' }}>
+          <Slide
+            index={i}
+            key={i}
+            tw='hover:opacity-60 cursor-pointer transition-all duration-300 ease-in'
+            style={{ paddingBottom: '1.25rem' }}
+          >
             <img src={img.url} alt='' tw='rounded-lg' />
           </Slide>
         ))}
@@ -44,22 +48,20 @@ const StudioView = () => {
       <Outlet />
       <Grid.Container pad>
         <Grid.Col>
-          <Link to='edit/bio' state={{ from: useLocation().pathname }}>
-            <AiOutlineEdit
-              size='2em'
-              tw='absolute top-0 right-0 text-blue-900 hover:text-blue-900 dark:(text-blue-700 hover:text-blue-900) transition-all duration-300 ease-in'
-            />
-          </Link>
-          <div tw='relative'>
-            <CarouselProvider naturalSlideWidth={100} naturalSlideHeight={100} totalSlides={3}>
-              <Slider>{!!images && consolidatePhotos()}</Slider>
-              <ButtonBack tw='absolute top-1/2 -left-4 hover:scale-y-50 -translate-y-1/2 transition duration-300'>
-                <BsChevronCompactLeft size='4em' />
-              </ButtonBack>
-              <ButtonNext tw='absolute top-1/2 -right-4 hover:scale-y-50 -translate-y-1/2 transition duration-300'>
-                <BsChevronCompactRight size='4em' />
-              </ButtonNext>
-            </CarouselProvider>
+          <div tw='flex justify-center items-center'>
+            <div tw='relative w-11/12 lg:w-3/4'>
+              <CarouselProvider naturalSlideWidth={80} naturalSlideHeight={80} totalSlides={3}>
+                <Link to='edit/site_images' state={{ from: useLocation().pathname }}>
+                  <Slider>{!!images && consolidatePhotos()}</Slider>
+                </Link>
+                <ButtonBack tw='absolute top-1/2 -left-12 hover:scale-y-50 -translate-y-1/2 transition duration-300'>
+                  <BsChevronCompactLeft size='4em' />
+                </ButtonBack>
+                <ButtonNext tw='absolute top-1/2 -right-12 hover:scale-y-50 -translate-y-1/2 transition duration-300'>
+                  <BsChevronCompactRight size='4em' />
+                </ButtonNext>
+              </CarouselProvider>
+            </div>
           </div>
         </Grid.Col>
         <Grid.Col pad></Grid.Col>
