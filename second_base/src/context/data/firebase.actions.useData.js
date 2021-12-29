@@ -40,9 +40,24 @@ export default function useData() {
   const uploadImage = async (file, path) => await action.uploadToStorage(file, `${path}.webp`);
 
   const updateImage = async data => {
-    await action.put('images', 'r27hUzvhqntH6iwSRiyX', { ...state.data.images, ...data });
+    console.log(data);
+    await action.put('images', 'r27hUzvhqntH6iwSRiyX', data);
+    dispatch({ type: 'UPDATE_IMAGE', payload: data });
+    return data;
   };
 
+  const deleteImage = async path => {
+    await action.deleteFromStorage(`${path}.webp`);
+  };
   // useEffect(() => () => dispatch({ type: 'GET_IMAGES', payload: images }), [images]);
-  return { addUser, getAll, uploadUserImg, updateUser, deleteUserImg, updateImage, uploadImage };
+  return {
+    addUser,
+    getAll,
+    uploadUserImg,
+    updateUser,
+    deleteUserImg,
+    updateImage,
+    uploadImage,
+    deleteImage,
+  };
 }

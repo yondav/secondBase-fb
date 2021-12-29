@@ -21,17 +21,23 @@ export default function dataReducer(state, { type, payload }) {
         ...state,
         data: { ...state.data, user: [payload] },
       };
+    case 'GET_STUDIO':
+      con.success('** STUDIO INFO FETCHED **');
+      return {
+        ...state,
+        data: { ...state.data, studio: payload },
+      };
     case 'GET_IMAGES':
       con.success('** IMAGES FETCHED **');
       return {
         ...state,
         data: { ...state.data, images: payload },
       };
-    case 'GET_STUDIO':
-      con.success('*** STUDIO INFO FETCHED **');
+    case 'UPDATE_IMAGE':
+      con.success('** IMAGE UPDATED **');
       return {
         ...state,
-        data: { ...state.data, studio: payload },
+        data: { ...state.data, images: payload },
       };
     default:
       return state;

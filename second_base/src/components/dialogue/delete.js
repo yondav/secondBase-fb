@@ -9,7 +9,7 @@ const ConfirmDelete = ({ isOpen, handleClose, deleteTask }) => {
       <p>Deleting data can't be undone. Delete anyway?</p>
       <div tw='flex justify-end'>
         <Form.Button onClick={handleClose}>Cancel</Form.Button>
-        <Form.Button onClick={deleteTask} red>
+        <Form.Button red onClick={deleteTask}>
           Delete
         </Form.Button>
       </div>

@@ -7,7 +7,7 @@ const StyledLabel = styled.label(({ group, check }) => [
 ]);
 
 const Label = ({ group, check, children }) => (
-  <StyledLabel group={group} check={check ? 1 : 0}>
+  <StyledLabel group={group} check={check ? 1 : undefined}>
     {children}
   </StyledLabel>
 );

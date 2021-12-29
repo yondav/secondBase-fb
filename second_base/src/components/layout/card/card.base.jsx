@@ -22,10 +22,10 @@ const StyledBase = styled(motion.div)(({ login, full, modal, dialogue }) => [
 const Base = ({ login, full, modal, dialogue, children, innerRef, ...rest }) => (
   <StyledBase
     ref={innerRef}
-    login={login ? 1 : 0}
-    full={full ? 1 : 0}
-    modal={modal ? 1 : 0}
-    dialogue={dialogue ? 1 : 0}
+    login={login ? 1 : undefined}
+    full={full ? 1 : undefined}
+    modal={modal ? 1 : undefined}
+    dialogue={dialogue ? 1 : undefined}
     {...rest}
   >
     {children}

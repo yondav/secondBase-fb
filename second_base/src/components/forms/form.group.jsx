@@ -8,7 +8,7 @@ const StyledGroup = styled.div(({ check }) => [
 ]);
 
 const Group = ({ check, children, ...rest }) => (
-  <StyledGroup check={check ? 1 : 0} {...rest}>
+  <StyledGroup check={check ? 1 : undefined} {...rest}>
     {children}
   </StyledGroup>
 );

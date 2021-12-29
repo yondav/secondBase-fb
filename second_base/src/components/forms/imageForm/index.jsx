@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Grid } from '../../layout';
 import { Form } from '..';
 
-const ImageForm = ({ updateTask, img }) => {
+const ImageForm = ({ updateTask, img, displayColor }) => {
   const [isLoading, setLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm();
 
@@ -23,7 +23,12 @@ const ImageForm = ({ updateTask, img }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid.Container pad>
         <Grid.Col>
-          <Form.Toggle innerRef={register} defaultChecked={img.color} name='color' />
+          <Form.Toggle
+            innerRef={register}
+            defaultChecked={img.color}
+            name='color'
+            onChange={e => displayColor && displayColor.setter(e.target.checked)}
+          />
         </Grid.Col>
         <Grid.Col>
           <Form.Group>

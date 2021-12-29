@@ -28,7 +28,7 @@ export const StyledBtn = styled.button(({ purple, red }) => [
 ]);
 
 const Button = ({ purple, red, children, ...rest }) => (
-  <StyledBtn {...rest} purple={purple ? 1 : 0} red={red ? 1 : 0}>
+  <StyledBtn {...rest} purple={purple ? 1 : undefined} red={red ? 1 : undefined}>
     {children}
   </StyledBtn>
 );

@@ -25,7 +25,7 @@ const ProfileView = React.lazy(() => import('../pages/portal/profile/profile.vie
 const ProfileImg = React.lazy(() => import('../pages/portal/profile/profile.image'));
 const ProfileBio = React.lazy(() => import('../pages/portal/profile/profile.bio'));
 const StudioView = React.lazy(() => import('../pages/portal/studio/studio.view'));
-const StudioSiteImages = React.lazy(() => import('../pages/portal/studio/studio.siteImages'));
+const StudioSiteImages = React.lazy(() => import('../pages/portal/studio/siteImages'));
 
 // 404
 const ErrorPage = React.lazy(() => import('../pages/ErrorPage'));

@@ -2,7 +2,7 @@
 import tw, { styled, css } from 'twin.macro';
 
 const Container = styled.div(({ square, circle, color }) => [
-  tw`relative overflow-hidden w-full rounded-lg`,
+  tw`relative overflow-hidden w-full rounded-lg transition-all duration-300 ease-in`,
 
   square &&
     css`

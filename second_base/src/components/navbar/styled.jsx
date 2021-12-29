@@ -14,7 +14,7 @@ const NavBar = styled(motion.nav)(({ dark, sticky }) => [
 ]);
 
 export const Bar = ({ dark, sticky, children }) => (
-  <NavBar dark={dark ? 1 : 0} sticky={sticky ? 1 : 0}>
+  <NavBar dark={dark ? 1 : undefined} sticky={sticky ? 1 : undefined}>
     <div tw='mx-auto px-8 transition-all duration-300 ease-in-out'>{children}</div>
   </NavBar>
 );
@@ -22,7 +22,7 @@ export const Bar = ({ dark, sticky, children }) => (
 // nav links
 const StyledLink = styled(RouterLink)(({ active, name, invert, side, sticky }) => [
   tw`pt-6 px-2 text-gray-500 hover:text-gray-500 transition duration-300`,
-  active === name && tw`text-gray-500 shadow-lg`,
+  active === name && tw`text-gray-500`,
   invert && tw`text-gray-950 hover:text-gray-600`,
   side && tw`hover:bg-gray-950 w-full py-4 pl-3`,
   side &&
@@ -39,11 +39,11 @@ export const Link = ({ text, active, name, to, onClick, invert, side, sticky }) 
     <StyledLink
       to={to}
       name={name}
-      active={active ? 1 : 0}
+      active={active ? 1 : undefined}
       onClick={onClick}
-      invert={invert ? 1 : 0}
-      side={side ? 1 : 0}
-      sticky={sticky ? 1 : 0}
+      invert={invert ? 1 : undefined}
+      side={side ? 1 : undefined}
+      sticky={sticky ? 1 : undefined}
     >
       {text}
     </StyledLink>
@@ -56,7 +56,7 @@ const StyledIcon = styled.div(({ invert }) => [
 ]);
 
 export const Icon = ({ invert, children, ...rest }) => (
-  <StyledIcon {...rest} invert={invert ? 1 : 0}>
+  <StyledIcon {...rest} invert={invert ? 1 : undefined}>
     {children}
   </StyledIcon>
 );
@@ -79,7 +79,7 @@ const Hamburger = styled.div(({ active }) => [
 ]);
 
 export const Burger = ({ active, onClick }) => (
-  <Hamburger active={active ? 1 : 0} onClick={onClick}>
+  <Hamburger active={active ? 1 : undefined} onClick={onClick}>
     <div className='top-bun' />
     <div className='bottom-bun' />
   </Hamburger>
@@ -97,7 +97,7 @@ const StyledSideNav = styled(motion.div)(({ sticky }) => [
 ]);
 
 export const SideNav = ({ sticky, innerRef, children, ...rest }) => (
-  <StyledSideNav ref={innerRef} sticky={sticky ? 1 : 0} {...rest}>
+  <StyledSideNav ref={innerRef} sticky={sticky ? 1 : undefined} {...rest}>
     {children}
   </StyledSideNav>
 );

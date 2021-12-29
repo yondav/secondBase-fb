@@ -21,7 +21,7 @@ const Links = ({ dark, toggleTheme }) => {
             to={`/${pg.name}`}
             text={toTitle(pg.name)}
             active={0}
-            invert={!dark ? 1 : 0}
+            invert={!dark ? 1 : undefined}
           />
         ))}
       </div>
@@ -34,13 +34,13 @@ const Links = ({ dark, toggleTheme }) => {
               text={toTitle(pg.name)}
               active={0}
               onClick={pg.onClick}
-              invert={!dark ? 1 : 0}
+              invert={!dark ? 1 : undefined}
             />
           ))}
       </div>
       <div tw='flex flex-col justify-end absolute bottom-6 right-2'>
         <div tw='flex'>
-          <Nav.Icon invert={!dark ? 1 : 0} onClick={toggleTheme}>
+          <Nav.Icon invert={!dark ? 1 : undefined} onClick={toggleTheme}>
             {dark ? <RiContrast2Fill /> : <RiContrast2Line />}
           </Nav.Icon>
           <a
@@ -48,7 +48,7 @@ const Links = ({ dark, toggleTheme }) => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <Nav.Icon invert={!dark ? 1 : 0}>
+            <Nav.Icon invert={!dark ? 1 : undefined}>
               {dark ? <RiInstagramLine /> : <RiInstagramFill />}
             </Nav.Icon>
           </a>
