@@ -5,6 +5,7 @@ import { AnimatePresence } from 'framer-motion';
 
 import { DataContext } from '../../../context/data/firebase.context.data';
 import useData from '../../../context/data/firebase.actions.useData';
+import useAlert from '../../../hooks/useAlert';
 import useNavigateBelow from '../../../hooks/useNavigateBelow';
 
 import RichText from '../../../components/forms/richtext';
@@ -13,18 +14,13 @@ import { Grid } from '../../../components/layout';
 
 const ProfileBio = () => {
   const navigateBelow = useNavigateBelow();
-  const [alert, setAlert] = useState(null);
   const { updateUser } = useData();
+  const { alert, updateAlert } = useAlert();
   const {
     state: {
       data: { user },
     },
   } = useContext(DataContext);
-
-  const updateAlert = update => {
-    setAlert(update);
-    setTimeout(() => setAlert(null), 2500);
-  };
 
   const handleSubmit = async (e, data) => {
     e.preventDefault();

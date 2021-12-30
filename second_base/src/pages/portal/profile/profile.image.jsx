@@ -6,6 +6,7 @@ import { AnimatePresence } from 'framer-motion';
 import { DataContext } from '../../../context/data/firebase.context.data';
 import useNavigateBelow from '../../../hooks/useNavigateBelow';
 import useData from '../../../context/data/firebase.actions.useData';
+import useAlert from '../../../hooks/useAlert';
 
 import { ImageForm, Uploader } from '../../../components/forms';
 import { Dialogue, Alert } from '../../../components';
@@ -17,20 +18,15 @@ const ProfileImg = () => {
   const navigateBelow = useNavigateBelow();
   const [uploader, setUploader] = useState(false);
   const [imgHover, setImgHover] = useState(false);
-  const [alert, setAlert] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const { uploadUserImg, updateUser, deleteUserImg } = useData();
+  const { alert, updateAlert } = useAlert();
   const {
     state: {
       data: { user },
     },
   } = useContext(DataContext);
   const [{ profile_img }] = user;
-
-  const updateAlert = update => {
-    setAlert(update);
-    setTimeout(() => setAlert(null), 2500);
-  };
 
   const uploadImg = async file => {
     const upload = await uploadUserImg(file);
@@ -78,7 +74,7 @@ const ProfileImg = () => {
           <>
             <div tw='col-span-12 lg:col-span-8'>
               <Container
-                color={profile_img.color}
+                color={profile_img.color ? 1 : undefined}
                 onMouseEnter={() => setImgHover(true)}
                 onMouseLeave={() => setImgHover(false)}
               >

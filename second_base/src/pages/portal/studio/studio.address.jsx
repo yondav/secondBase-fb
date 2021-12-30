@@ -1,10 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
-import React, { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AnimatePresence } from 'framer-motion';
 import { DataContext } from '../../../context/data/firebase.context.data';
 import useData from '../../../context/data/firebase.actions.useData';
+import useAlert from '../../../hooks/useAlert';
 import useNavigateBelow from '../../../hooks/useNavigateBelow';
 import { Grid, Form, Alert } from '../../../components';
 
@@ -17,15 +18,10 @@ const StudioAddress = () => {
   const { address } = studio;
 
   const { updateStudio } = useData();
+  const { alert, updateAlert } = useAlert();
   const navigateBelow = useNavigateBelow();
 
-  const [alert, setAlert] = useState(null);
-  const { register, handleSubmit, reset } = useForm();
-
-  const updateAlert = update => {
-    setAlert(update);
-    setTimeout(() => setAlert(null), 2500);
-  };
+  const { register, handleSubmit } = useForm();
 
   const onSubmit = async data => {
     const update = await updateStudio({ ...studio, ...data });

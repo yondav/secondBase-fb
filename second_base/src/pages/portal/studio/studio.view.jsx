@@ -110,7 +110,7 @@ const StudioView = () => {
               <h2>Services</h2>
               <ul>
                 {services.map((serv, i) => (
-                  <li key={i}>{serv}</li>
+                  <li key={i}>{serv.title}</li>
                 ))}
               </ul>
             </>

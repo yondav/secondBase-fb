@@ -3,6 +3,7 @@ import tw from 'twin.macro';
 import { useState, useContext } from 'react';
 import { DataContext } from '../../../../context/data/firebase.context.data';
 import useData from '../../../../context/data/firebase.actions.useData';
+import useAlert from '../../../../hooks/useAlert';
 import { toTitle } from '../../../../utils/helpers';
 import { Container, DeleteOverlay } from '../../../../components/image';
 import { Uploader, ImageForm } from '../../../../components/forms';
@@ -21,14 +22,9 @@ const SiteImagesImage = ({ img, pg }) => {
   const [active, setActive] = useState(false);
   const [imgHover, setImgHover] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
-  const [alert, setAlert] = useState(null);
 
   const { updateImage, uploadImage, deleteImage } = useData();
-
-  const updateAlert = update => {
-    setAlert(update);
-    setTimeout(() => setAlert(null), 2500);
-  };
+  const { alert, updateAlert } = useAlert();
 
   const uploadImg = async file => {
     const upload = await uploadImage(file, `${pg}/${img}`);
