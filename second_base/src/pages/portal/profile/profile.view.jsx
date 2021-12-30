@@ -2,10 +2,10 @@
 import tw, { styled } from 'twin.macro';
 import { useContext, useEffect } from 'react';
 import { Outlet, useLocation, Link } from 'react-router-dom';
-import { AiOutlineEdit } from 'react-icons/ai';
 import { DataContext } from '../../../context/data/firebase.context.data';
 import { Container } from '../../../components/image';
 import { Grid } from '../../../components/layout';
+import { EditLink } from '../../../components';
 
 const Bio = styled.article`
   ${tw`mt-3`}
@@ -17,15 +17,13 @@ const Bio = styled.article`
 const ProfileView = () => {
   const {
     state: {
-      data: { user }, // add color prop to image container when image set up in db
+      data: { user },
     },
   } = useContext(DataContext);
 
   const renderBio = () => {
     let bioEl = document.querySelector('.portal-bio');
-    console.log(bioEl);
     let bio = user[0].bio.html;
-    console.log(JSON.parse(JSON.stringify(bio)));
     bio
       ? (bioEl.innerHTML = JSON.parse(JSON.stringify(bio)))
       : (bioEl.innerHTML = 'add bio for about page');
@@ -60,12 +58,7 @@ const ProfileView = () => {
         </Grid.Col>
         <Grid.Col pad>
           <div tw='flex justify-between flex-col relative'>
-            <Link to='edit/bio' state={{ from: useLocation().pathname }}>
-              <AiOutlineEdit
-                size='2em'
-                tw='absolute top-0 right-0 text-blue-900 hover:text-blue-900 dark:(text-blue-700 hover:text-blue-900) transition-all duration-300 ease-in'
-              />
-            </Link>
+            <EditLink to={'edit/bio'} />
             <h1>{user[0].name}</h1>
             <p>{user[0].email}</p>
             <Bio className='portal-bio'></Bio>

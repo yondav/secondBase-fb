@@ -40,7 +40,6 @@ export default function useData() {
   const uploadImage = async (file, path) => await action.uploadToStorage(file, `${path}.webp`);
 
   const updateImage = async data => {
-    console.log(data);
     await action.put('images', 'r27hUzvhqntH6iwSRiyX', data);
     dispatch({ type: 'UPDATE_IMAGE', payload: data });
     return data;
@@ -49,6 +48,14 @@ export default function useData() {
   const deleteImage = async path => {
     await action.deleteFromStorage(`${path}.webp`);
   };
+
+  // studio updates
+  const updateStudio = async data => {
+    await action.put('studio', 'LXqUssZrurf6jg2glqcs', data);
+    dispatch({ type: 'UPDATE_STUDIO', payload: data });
+    return data;
+  };
+
   // useEffect(() => () => dispatch({ type: 'GET_IMAGES', payload: images }), [images]);
   return {
     addUser,
@@ -59,5 +66,6 @@ export default function useData() {
     updateImage,
     uploadImage,
     deleteImage,
+    updateStudio,
   };
 }

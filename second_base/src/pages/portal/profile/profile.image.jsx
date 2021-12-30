@@ -54,7 +54,6 @@ const ProfileImg = () => {
     });
 
     if (res) {
-      console.log(res);
       updateAlert({ variant: 'success', message: `Image has been updated` });
       setTimeout(() => navigateBelow(), 3500);
     } else {

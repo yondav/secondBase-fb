@@ -39,6 +39,12 @@ export default function dataReducer(state, { type, payload }) {
         ...state,
         data: { ...state.data, images: payload },
       };
+    case 'UPDATE_STUDIO':
+      con.success('** STUDIO UPDATED **');
+      return {
+        ...state,
+        data: { ...state.data, studio: payload },
+      };
     default:
       return state;
   }

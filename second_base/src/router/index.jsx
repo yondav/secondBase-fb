@@ -26,6 +26,8 @@ const ProfileImg = React.lazy(() => import('../pages/portal/profile/profile.imag
 const ProfileBio = React.lazy(() => import('../pages/portal/profile/profile.bio'));
 const StudioView = React.lazy(() => import('../pages/portal/studio/studio.view'));
 const StudioSiteImages = React.lazy(() => import('../pages/portal/studio/siteImages'));
+const StudioServices = React.lazy(() => import('../pages/portal/studio/studio.services'));
+const StudioAddress = React.lazy(() => import('../pages/portal/studio/studio.address'));
 
 // 404
 const ErrorPage = React.lazy(() => import('../pages/ErrorPage'));
@@ -56,6 +58,8 @@ const SiteMap = () => {
         <Route path='studio/' element={<LazyLoad el={<StudioView />} />}>
           <Route path='edit/' element={<LazyLoad el={<ModalRouter />} />}>
             <Route path='site_images' element={<LazyLoad el={<StudioSiteImages />} />} />
+            <Route path='address' element={<LazyLoad el={<StudioAddress />} />} />
+            <Route path='services' element={<LazyLoad el={<StudioServices />} />} />
           </Route>
         </Route>
         <Route path='gear' element={<LazyLoad el={<GearView />} />} />

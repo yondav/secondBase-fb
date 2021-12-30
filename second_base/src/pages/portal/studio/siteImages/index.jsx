@@ -2,10 +2,11 @@
 import tw from 'twin.macro';
 import { useState, useContext } from 'react';
 import { DataContext } from '../../../../context/data/firebase.context.data';
-import { Grid } from '../../../../components/layout';
 import { toTitle } from '../../../../utils/helpers';
 import SiteImagesImage from './siteImages.image';
 import Accordion from '../../../../components/layout/accordion';
+import { AnimatePresence } from 'framer-motion';
+import { Alert } from '../../../../components';
 
 const StudioSiteImages = () => {
   const {
@@ -13,6 +14,7 @@ const StudioSiteImages = () => {
       data: { images },
     },
   } = useContext(DataContext);
+
   const [active, setActive] = useState([]);
 
   const activeSetter = eventKey => {
