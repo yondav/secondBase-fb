@@ -23,7 +23,7 @@ const WrapApp = styled.div`
   }
 
   & h3 {
-    ${tw`text-xl font-header`}
+    ${tw`text-xl font-header font-medium`}
   }
 
   & blockquote {

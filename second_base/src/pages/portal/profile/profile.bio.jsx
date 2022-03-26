@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
 import { DataContext } from '../../../context/data/firebase.context.data';

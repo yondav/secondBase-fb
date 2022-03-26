@@ -60,7 +60,12 @@ const SiteImagesImage = ({ img, pg }) => {
 
   return (
     <>
-      <Accordion.Section title={toTitle(img)} active={active} setActive={() => setActive(!active)}>
+      <Accordion.Section
+        sub
+        title={toTitle(img)}
+        active={active}
+        setActive={() => setActive(!active)}
+      >
         {images[pg][img].url ? (
           <Grid.Container>
             <div tw='col-span-12 lg:col-span-8 my-6'>

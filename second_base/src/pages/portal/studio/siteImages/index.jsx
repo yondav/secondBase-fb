@@ -4,9 +4,7 @@ import { useState, useContext } from 'react';
 import { DataContext } from '../../../../context/data/firebase.context.data';
 import { toTitle } from '../../../../utils/helpers';
 import SiteImagesImage from './siteImages.image';
-import Accordion from '../../../../components/layout/accordion';
-import { AnimatePresence } from 'framer-motion';
-import { Alert } from '../../../../components';
+import Accordion, { activeSetter } from '../../../../components/layout/accordion';
 
 const StudioSiteImages = () => {
   const {
@@ -16,15 +14,6 @@ const StudioSiteImages = () => {
   } = useContext(DataContext);
 
   const [active, setActive] = useState([]);
-
-  const activeSetter = eventKey => {
-    let list = [...active];
-    let isActive = list.find(key => key === eventKey);
-
-    isActive ? list.splice(list.indexOf(isActive), 1) : list.push(eventKey);
-
-    setActive(list);
-  };
 
   const pages = Object.entries(images)
     .sort((a, b) => {
@@ -40,7 +29,7 @@ const StudioSiteImages = () => {
         <Accordion.Section
           title={toTitle(pg)}
           active={active.includes(pg)}
-          setActive={() => activeSetter(pg)}
+          setActive={() => activeSetter({ active, setActive }, pg)}
           key={i}
         >
           <div tw='p-5'>

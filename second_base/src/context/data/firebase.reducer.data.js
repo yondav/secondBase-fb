@@ -45,6 +45,12 @@ export default function dataReducer(state, { type, payload }) {
         ...state,
         data: { ...state.data, studio: payload },
       };
+    case 'GET_GEAR':
+      con.success('** GEAR FETCHED **');
+      return {
+        ...state,
+        data: { ...state.data, gear: payload },
+      };
     default:
       return state;
   }

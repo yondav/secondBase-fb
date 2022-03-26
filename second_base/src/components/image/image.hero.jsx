@@ -7,7 +7,7 @@ const HeroStyles = styled.div`
   ${tw`w-full`}
 
   & .hero-inner {
-    ${tw`relative h-screen text-center bg-no-repeat bg-center bg-fixed bg-cover relative`}
+    ${tw`relative h-screen text-center bg-no-repeat bg-center bg-fixed bg-cover`}
   }
 `;
 

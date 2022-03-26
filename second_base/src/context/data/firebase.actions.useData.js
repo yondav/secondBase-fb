@@ -1,10 +1,10 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { DataContext } from './firebase.context.data';
 import { userModel } from '../../firebase/firebase.models';
 import * as action from '../../firebase/firebase.tasks';
 
 export default function useData() {
-  const { state, dispatch } = useContext(DataContext);
+  const { dispatch } = useContext(DataContext);
 
   // get all
   const getAll = async (collection, type = null) => {
@@ -56,7 +56,13 @@ export default function useData() {
     return data;
   };
 
-  // useEffect(() => () => dispatch({ type: 'GET_IMAGES', payload: images }), [images]);
+  // gear updates
+  const updateGear = async data => {
+    await action.put('gear', 'GcBAjIgYc78Yr3WGwyWB', data);
+    dispatch({ type: 'UPDATE_GEAR', payload: data });
+    return data;
+  };
+
   return {
     addUser,
     getAll,
@@ -67,5 +73,6 @@ export default function useData() {
     uploadImage,
     deleteImage,
     updateStudio,
+    updateGear,
   };
 }

@@ -8,9 +8,9 @@ const StyledButton = styled(motion.button)`
   ${tw`p-4 text-xl flex justify-between items-center rounded-md dark:hover:bg-gray-900 hover:shadow-lg focus:outline-none transition-all duration-300 ease-in`}
 `;
 
-const Button = ({ title, setActive, active }) => (
+const Button = ({ title, setActive, active, sub }) => (
   <StyledButton onClick={() => setActive(!active)}>
-    <h2>{title}</h2>
+    {!sub ? <h2>{title}</h2> : <h3>{title}</h3>}
     <BsChevronCompactDown
       style={{
         transform: active && 'rotate(180deg)',
@@ -20,9 +20,9 @@ const Button = ({ title, setActive, active }) => (
   </StyledButton>
 );
 
-const Section = ({ title, setActive, active, children }) => (
+const Section = ({ title, setActive, active, sub, children }) => (
   <article tw='w-full p-4 flex flex-col'>
-    <Button title={title} active={active} setActive={setActive} />
+    <Button title={title} active={active} setActive={setActive} sub={sub} />
 
     <AnimatePresence>
       {active && (

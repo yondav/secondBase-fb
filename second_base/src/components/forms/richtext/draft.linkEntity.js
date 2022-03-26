@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import tw, { styled } from 'twin.macro';
-import React from 'react';
+import tw from 'twin.macro';
 import { CompositeDecorator, EditorState, Modifier } from 'draft-js';
 
 const Link = ({ entityKey, contentState, children }) => {

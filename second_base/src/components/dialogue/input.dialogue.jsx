@@ -15,7 +15,6 @@ const InputDialogue = ({ isOpen, handleClose, form }) => {
     setInputVal(obj);
   };
 
-  // useEffect(() => console.log(inputVal), [inputVal]);
   return (
     <Modal dialogue={1} isOpen={isOpen} handleClose={handleClose}>
       {form.inputs.map(inp => (

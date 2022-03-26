@@ -19,10 +19,9 @@ const LoginPage = () => {
   const [isLoading, setLoading] = useState(false);
 
   const onSubmit = async data => {
-    let user;
     setLoading(true);
     try {
-      user = await login(data);
+      await login(data);
       reset();
     } catch (err) {
       console.log(err);

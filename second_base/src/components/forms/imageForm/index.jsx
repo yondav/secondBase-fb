@@ -1,21 +1,21 @@
 /** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
-import { useState, useEffect } from 'react';
+// import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Grid } from '../../layout';
 import { Form } from '..';
 
 const ImageForm = ({ updateTask, img, displayColor }) => {
-  const [isLoading, setLoading] = useState(false);
+  // const [isLoading, setLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async data => {
-    setLoading(true);
+    // setLoading(true);
     const res = updateTask(data);
 
     if (res) {
       reset();
-      setTimeout(() => setLoading(false), 2550);
+      // setTimeout(() => setLoading(false), 2550);
     }
   };
 

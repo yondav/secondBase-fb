@@ -17,6 +17,7 @@ function App() {
     await getAll('users', 'GET_USERS'); // fetch users
     await getAll('images', 'GET_IMAGES'); // fetch images
     await getAll('studio', 'GET_STUDIO'); // fetch studio info
+    await getAll('gear', 'GET_GEAR'); // fetch all gear
   };
 
   useEffect(() => fetch(), []);
